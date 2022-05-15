@@ -1,0 +1,48 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+body{
+    background-color: gray;
+}
+
+main{
+    background-color: wheat;
+}
+
+header{
+    display: flex;
+    background-color: bisque;
+}
+
+.header-logo{
+    display: flex;
+}
+
+.header-logo-title{
+    display: flex;
+    align-items: center;
+}
+
+nav{
+    display: flex;
+    align-items: center;
+}
+
+.title{
+    background-color: burlywood;
+}
+
+.main_events{
+    background-color: thistle;
+}
+
+.last_events{
+    background-color: mediumpurple;
+}
+
