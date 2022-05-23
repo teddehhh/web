@@ -37,7 +37,7 @@ header{
     padding-right: 5%;
     padding-left: 5%;
     margin: 50px 5%;
-    height: 80px;
+    min-height: 80px;
 
     background-color: #282828;
     border-radius: 10px;
@@ -46,13 +46,11 @@ header{
 .header-logo{
     display: flex;
     align-items: center;
-
     font-size: 20px;
 }
 
 nav{
     display: flex;
-
     font-size: 14px;
 }
 
@@ -68,18 +66,23 @@ nav{
 .title-section{
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: space-between;
     padding-right: 5%;
     padding-left: 5%;
     margin-bottom: 15px;
 }
 
+.title-section>h1{
+    margin-right: 200px;
+}
+
 .search{
     display: flex;
     align-items: center;
+    flex-grow: 1;
     height: 50px;
-    width: 300px;
-
+    max-width: 300px;
     border-radius: 10px;
     background-color: #F4F4F4;
 }
@@ -90,6 +93,7 @@ nav{
 
 .search span{
     font-size: 15px;
+    margin-right: 10px;
     font-style: italic;
     font-weight: lighter;
 }
@@ -97,6 +101,7 @@ nav{
 /* footer */
 footer{
     display: flex;
+    flex-wrap: wrap;
     justify-content:space-between;
     align-items: center;
     padding-right: 5%;
@@ -125,6 +130,10 @@ footer{
     justify-content: space-between;
 }
 
+.side-links a{
+    margin-top: 5%;
+}
+
 /* main-news */
 .main-news{
     background-color: #799DB1;
@@ -135,6 +144,7 @@ footer{
 
 .cards{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
@@ -195,16 +205,87 @@ footer{
 
 .little-card{
     flex-basis: 200px;
-    flex-grow: 1;
     padding: 10px;
     margin: 5px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     
     background-color: #282828;
+    color: white;
     border-radius: 10px;
 }
 
 .little-card img{
     width: 30%;
+}
+
+.little-card p{
+    margin-left: 5%;
+}
+
+/* albums.html */
+.albums{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-right: 5%;
+    padding-left: 5%;
+
+    background-color: #F6F6F6;
+}
+
+.pages-bar{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 50px 5%;
+}
+
+.page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+    background-color: #282828;
+    color: white;
+    border-radius: 5px;
+    width: 25px;
+    height: 25px;
+}
+
+.page a{
+    margin: auto;
+}
+
+/* artists.html */
+.artists{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 50px 5%;
+    background-color: #B1B1B1;
+}
+
+.artist-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-basis: 300px;
+    align-items: center;
+    background-color: #818181;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.artist-card>img{
+    width: 50%;
+    border-radius: 100px;
+}
+
+.artist-card>p{
+    font-size: 20px;
 }
