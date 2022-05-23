@@ -154,6 +154,12 @@ footer{
     padding-right: 5%;
 }
 
+.ln-cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
 /* cards */
 .medium-card{
     flex-basis: 300px;
@@ -273,7 +279,7 @@ footer{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex-basis: 300px;
+    width: 20%;
     align-items: center;
     background-color: #818181;
     border-radius: 10px;
@@ -287,5 +293,6 @@ footer{
 }
 
 .artist-card>p{
-    font-size: 20px;
+    text-align: center;
+    font-size: 2vw;
 }
