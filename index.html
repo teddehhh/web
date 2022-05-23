@@ -3,45 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <title>musculture</title>
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/news-style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet"> 
 </head>
 <body>
     <header>
-        <a href="/">
-            <div class="header-logo">
-                <img src="images/logo.png">
-                <p class="header-logo-title">musculture</p>
-            </div>
-        </a>
-        <div class="header-search">
+        <div class="header-logo">
+            <img src="images/logo.png">
+            <p class="header-logo-title">musculture</p>
         </div>
         <nav>
-            <a class="navlink" href="/">Новости</a>
-            <p class="navsep">|</p>
-            <a class="navlink" href="/">Категории</a>
-            <p class="navsep">|</p>
-            <a class="navlink" href="/">Музыканты</a>
-            <p class="navsep">|</p>
-            <a class="navlink" href="/">Альбомы</a>
-            <p class="navsep">|</p>
-            <a class="navlink" href="/">Карта</a>
+            <a class="navlink" href="index.html" title="Просмотр акутальных новостей из мира музыки"><u>Новости</u></a>
+            <span class="navsep">|</span>
+            <a class="navlink" href="artists.html" title="Полный список музыканов">Музыканты</a>
+            <span class="navsep">|</span>
+            <a class="navlink" href="albums.html" title="Полный список всех альбомов">Альбомы</a>
         </nav>
     </header>
     <main>
-        <section class="title">
-            <h1>Акутальные новости на 1 июня</h1>
+        <section class="title-section">
+            <h1>Актуальные новости. <span>Среда, 1 июня</span></h1>
+            <div class="search">
+                <img src="/images/search-icon.png" alt="">
+                <span>Что ищем?</span>
+            </div>
         </section>
-        <section class="main_events">
+        <section class="main-news">
             <h2>Главные события:</h2>
+            <div class="cards">
+                <div class="medium-card">
+                    <div class="mc-album">
+                        <img src="/images/albums/misser.png" alt="">
+                        <p class="mc-title">Misery Sermon</p>
+                    </div>
+                    <div class="mc-artist">
+                        <img src="/images/artists/sltopr.jpg" alt="">
+                        <p>Slaughter to Prevail</p>
+                    </div>
+                    <p class="mc-description">Международный дебют российской дектор-команды.</p>
+                </div>
+                <div class="medium-card">
+                    <div class="mc-album">
+                        <img src="/images/albums/hfk.png" alt="">
+                        <p class="mc-title">Hopeless Fountain Kingdom</p>
+                    </div>
+                    <div class="mc-artist">
+                        <img src="/images/artists/halsey.jpg" alt="">
+                        <p>Halsey</p>
+                    </div>
+                    <p class="mc-description">Стремительное взросление вчерашней тинейджер-звезды продолжается на ее втором релизе «Hopeless Fountain Kingdom».</p>
+                </div>
+                <div class="medium-card">
+                    <div class="mc-album">
+                        <img src="/images/albums/ng.jpg" alt="">
+                        <p class="mc-title">Nowhere Generation</p>
+                    </div>
+                    <div class="mc-artist">
+                        <img src="/images/artists/rise.jpg" alt="">
+                        <p>Rise Against</p>
+                    </div>
+                    <p class="mc-description">Прошло двадцать лет, а их революционный огонь все так же актуален и так же печально необходим, как и прежде.</p>
+                </div>
+                <div class="medium-card">
+                    <div class="mc-album">
+                        <img src="/images/albums/trinme.jpg" alt="">
+                        <p class="mc-title">Trust in Me</p>
+                    </div>
+                    <div class="mc-artist">
+                        <img src="/images/artists/Direct_2019.jpg" alt="">
+                        <p>Direct</p>
+                    </div>
+                    <p class="mc-description">Trust In Me - это альбом в стиле “chillout” от Direct, Mr FijiWiji and Holly Drummond.</p>
+                </div>
+            </div>
         </section>
-        <section class="last_events">
+        <section class="last-news">
             <h2>Из последнего:</h2>
+            <div class="cards">
+                <div class="little-card">
+                    <img src="/images/albums/frtwte.jpg" alt="">
+                    <p>text</p>
+                </div>
+                <div class="little-card">
+                    <img src="/images/albums/frtwte.jpg" alt="">
+                    <p>text</p>
+                </div>
+                <div class="little-card">
+                    <img src="/images/albums/frtwte.jpg" alt="">
+                    <p>text</p>
+                </div>
+                <div class="little-card">
+                    <img src="/images/albums/frtwte.jpg" alt="">
+                    <p>text</p>
+                </div>
+                <div class="little-card">
+                    <img src="/images/albums/frtwte.jpg" alt="">
+                    <p>text</p>
+                </div>
+                <div class="little-card">
+                    <img src="/images/albums/frtwte.jpg" alt="">
+                    <p>text</p>
+                </div>
+                <div class="little-card">
+                    <img src="/images/albums/frtwte.jpg" alt="">
+                    <p>text</p>
+                </div>
+                <div class="little-card">
+                    <img src="/images/albums/frtwte.jpg" alt="">
+                    <p>text</p>
+                </div>
+            </div>
         </section>
     </main>
     <footer>
-
+        <div class="side-links">
+            <a href="login.html">Вход для администрирования</a>
+            <a href="about.html">О проекте</a>
+        </div>
+        <div class="contacts">
+            <span>Наши контакты:</span>
+            <div class="socials">
+                <a href=""><img src="/images/vk.png" alt="Вконтакте"></a>
+                <a href=""><img src="/images/telegram.png" alt="Телеграм"></a>
+                <a href=""><img src="/images/youtube.png" alt="Youtube"></a>
+            </div>
+        </div>
     </footer>
 </body>
 </html>
