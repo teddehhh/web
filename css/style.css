@@ -29,6 +29,10 @@ h2{
     padding-bottom:30px;
 }
 
+th{
+    text-align: left;
+}
+
 /* header */
 header{
     display: flex;
@@ -39,32 +43,10 @@ header{
     padding-right: 5%;
     padding-left: 5%;
     margin: 50px 5%;
-    
     background-color: #282828;
     border-radius: 10px;
 }
 
-@media (max-width: 992px){
-    header{
-        display: flex;
-        flex-wrap: wrap;
-        flex-grow: 1;
-        justify-content:space-evenly;
-        align-items: center;
-        padding: 20px 5%;
-        padding-left: 5%;
-        margin: 50px 5%;
-
-        background-color: #282828;
-        border-radius: 10px;
-    }
-    .navsep{
-        display: none;
-    }
-    .navlink{
-        margin:auto 10px;
-    }
-}
 
 .header-logo{
     display: flex;
@@ -100,7 +82,7 @@ nav{
 }
 
 .title-section>h1{
-    margin-right: 200px;
+    margin-right: 10%;
 }
 
 .search{
@@ -111,6 +93,7 @@ nav{
     max-width: 300px;
     border-radius: 10px;
     background-color: #F4F4F4;
+    border: #282828 2px solid;
 }
 
 .search img{
@@ -195,7 +178,6 @@ footer{
     display: flex;
     flex-direction: column;
     color: white;
-    
     background-color: #282828;
     border-radius: 10px;
 }
@@ -214,7 +196,7 @@ footer{
     width: 40%;
 }
 
-.mc-album p{
+.mc-album a{
     font-weight: bold;
     margin: 10px auto;
 }
@@ -230,7 +212,7 @@ footer{
     margin-left: 3%;
 }
 
-.mc-artist p{
+.mc-artist a{
     margin-left: 5%;
     color: #B1B1B1;
 }
@@ -242,7 +224,6 @@ footer{
     display: flex;
     flex-direction: row;
     align-items: center;
-    
     background-color: #282828;
     color: white;
     border-radius: 10px;
@@ -263,7 +244,6 @@ footer{
     justify-content: center;
     padding-right: 5%;
     padding-left: 5%;
-
     background-color: #F6F6F6;
 }
 
@@ -272,7 +252,7 @@ footer{
     flex-wrap: wrap;
     justify-content: center;
     padding: 50px 5%;
-    background-color: #B1B1B1;
+    background-color: #F6F6F6;
 }
 
 .page{
@@ -299,7 +279,7 @@ footer{
     flex-wrap: wrap;
     justify-content: center;
     padding: 50px 5%;
-    background-color: #B1B1B1;
+    background-color: #F6F6F6;
 }
 
 .artist-card{
@@ -322,4 +302,60 @@ footer{
 .artist-card>p{
     text-align: center;
     font-weight: bold;
+}
+
+/* album */
+.album{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 0 5%;
+}
+
+.album-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 30%;
+}
+
+.album-info>img{
+    width: 70%;
+    margin: 30px auto;
+}
+
+.artist-link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.al-data{
+    display:flex;
+    align-items: center;
+}
+
+.al-data>img{
+    width: 20%;
+}
+
+.al-data span{
+    margin-left: 10px;
+}
+
+@media (max-width: 992px){
+    header{
+        justify-content:space-evenly;
+        align-items: center;
+        padding: 20px 5%;
+    }
+    .navsep{
+        display: none;
+    }
+    .navlink{
+        margin: auto 10px;
+    }
+    .search{
+        margin: 20px auto;
+    }
 }
