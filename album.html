@@ -14,7 +14,7 @@
             <p class="header-logo-title">musculture</p>
         </div>
         <nav>
-            <a class="navlink" href="index.html" title="Просмотр акутальных новостей из мира музыки"><u>Новости</u></a>
+            <a class="navlink" href="index.html" title="Просмотр акутальных новостей из мира музыки">Новости</a>
             <span class="navsep">|</span>
             <a class="navlink" href="artists.html" title="Полный список музыканов">Музыканты</a>
             <span class="navsep">|</span>
@@ -34,65 +34,92 @@
                 <h2>Треклист альбома:</h2>
                 <table class="tl-table">
                     <tr>
-                        <th>#Трека</th>
+                        <th id="th-num">#</th>
                         <th>Название</th>
                         <th>Длина</th>
                     </tr>
                     <tr>
-                        <td>1</td>
-                        <td>The Numbers</td>
-                        <td>4:39</td>
+                        <td class="tr-num">1</td>
+                        <td class="tr-title">The Numbers</td>
+                        <td class="tr-len">4:39</td>
                     </tr>
                     <tr>
-                        <td>2</td>
-                        <td>Sudden Urge</td>
-                        <td>3:46</td>
+                        <td class="tr-num">2</td>
+                        <td class="tr-title">Sudden Urge</td>
+                        <td class="tr-len">3:46</td>
                     </tr>
                     <tr>
-                        <td>3</td>
-                        <td>Nowhere Generation</td>
-                        <td>3:52</td>
+                        <td class="tr-num">3</td>
+                        <td class="tr-title">Nowhere Generation</td>
+                        <td class="tr-len">3:52</td>
                     </tr>
                     <tr>
-                        <td>4</td>
-                        <td>Talking to Ourselves</td>
-                        <td>3:24</td>
+                        <td class="tr-num">4</td>
+                        <td class="tr-title">Talking to Ourselves</td>
+                        <td class="tr-len">3:24</td>
+                    </tr>
+                    <tr>
+                        <td class="tr-num">5</td>
+                        <td class="tr-title">Broken Dream, Inc.</td>
+                        <td class="tr-len">3:53</td>
+                    </tr><tr>
+                        <td class="tr-num">6</td>
+                        <td class="tr-title">Forfeit</td>
+                        <td class="tr-len">3:44</td>
+                    </tr><tr>
+                        <td class="tr-num">7</td>
+                        <td class="tr-title">Monarch</td>
+                        <td class="tr-len">3:32</td>
+                    </tr><tr>
+                        <td class="tr-num">8</td>
+                        <td class="tr-title">Sounds Like</td>
+                        <td class="tr-len">3:25</td>
+                    </tr><tr>
+                        <td class="tr-num">9</td>
+                        <td class="tr-title">Sooner or Later</td>
+                        <td class="tr-len">3:34</td>
+                    </tr><tr>
+                        <td class="tr-num">10</td>
+                        <td class="tr-title">Middle of a Dream</td>
+                        <td class="tr-len">3:44</td>
+                    </tr><tr>
+                        <td class="tr-num">11</td>
+                        <td class="tr-title">Rules of Play</td>
+                        <td class="tr-len">3:43</td>
                     </tr>
                 </table>
             </div>
             <section class="album-info">
                 <img src="/images/albums/ng.jpg" alt="">
-                <div class="artist-link">
+                <a href="/artist.html" class="artist-link">
                     <div class="al-data">
                         <img src="/images/artists/rise.jpg" alt="">
                         <span>Rise Against</span>
                     </div>
                     <img src="/images/arrow.png" alt="">
-                </div>
-                <table>
+                </a>
+                <table class="ai-table">
                     <caption>Информация об альбоме</caption>
-                    <table class="ai-table">
-                        <tr>
-                            <th>Дата выхода:</th>
-                            <td>4 июня, 2021</td>
-                        </tr>
-                        <tr>
-                            <th>Жанр:</th>
-                            <td>Панк-рок</td>
-                        </tr>
-                        <tr>
-                            <th>Студия:</th>
-                            <td>The Blasting Room</td>
-                        </tr>
-                        <tr>
-                            <th>Продолжительность:</th>
-                            <td>41:36</td>
-                        </tr>
-                        <tr>
-                            <th>Тип:</th>
-                            <td>Альбом</td>
-                        </tr>
-                    </table>
+                    <tr>
+                        <th>Дата выхода:</th>
+                        <td>4 июня, 2021</td>
+                    </tr>
+                    <tr>
+                        <th>Жанр:</th>
+                        <td>Панк-рок</td>
+                    </tr>
+                    <tr>
+                        <th>Студия:</th>
+                        <td>The Blasting Room</td>
+                    </tr>
+                    <tr>
+                        <th>Продолжительность:</th>
+                        <td>41:36</td>
+                    </tr>
+                    <tr>
+                        <th>Тип:</th>
+                        <td>Альбом</td>
+                    </tr>
                 </table>
             </section>
         </section>
@@ -100,7 +127,6 @@
     <footer>
         <div class="side-links">
             <a href="login.html">Вход для администрирования</a>
-            <a href="about.html">О проекте</a>
         </div>
         <div class="contacts">
             <span>Наши контакты:</span>

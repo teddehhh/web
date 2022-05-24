@@ -182,6 +182,12 @@ footer{
     border-radius: 10px;
 }
 
+.medium-card:hover{
+    background-color: #4a5d68;
+    border:2px solid #282828;
+    margin:3px;
+}
+
 .medium-card p{
     margin: 3%;
 }
@@ -227,6 +233,17 @@ footer{
     background-color: #282828;
     color: white;
     border-radius: 10px;
+}
+
+.little-card:hover{
+    background-color: #F6F6F6;
+    color:#282828;
+    font-weight: 600;
+    border: 2px solid #B1B1B1;
+    margin: 3px;
+}
+.little-card:active{
+    background-color: #a8a8a8;
 }
 
 .little-card img{
@@ -294,6 +311,14 @@ footer{
     padding: 10px;
 }
 
+.artist-card:hover{
+    background-color: #B1B1B1;
+}
+
+.artist-card:active{
+    background-color: #818181;
+}
+
 .artist-card>img{
     width: 50%;
     border-radius: 50%;
@@ -328,6 +353,20 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
+    border: #282828 2px solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin:10px auto;
+}
+
+.artist-link:hover{
+    background-color: #363636;
+    color: white;
+}
+
+.artist-link:active{
+    background-color: #1a1a1a;
+    color: white;
 }
 
 .al-data{
@@ -337,10 +376,107 @@ footer{
 
 .al-data>img{
     width: 20%;
+    border-radius: 50%;
 }
 
 .al-data span{
     margin-left: 10px;
+}
+
+.ai-table caption{
+    text-align: left;
+    margin:20px auto;
+}
+
+.ai-table td{
+    text-align: right;
+}
+
+.ai-table th, .ai-table td{
+    border-bottom: 2px solid black;
+}
+
+.tl-table{
+    border-collapse: separate;
+    border-spacing: 0px 10px;
+}
+
+.ai-table{
+    border-collapse: collapse;
+}
+
+.tr-len{
+    text-align: right;
+}
+
+.tl-table table{
+    border-spacing: 0px 20px;
+}
+
+.tl-table td{
+    background-color: #282828;
+    color: white;
+}
+
+.tl-table tr{
+    line-height: 30px;
+}
+
+.tr-num, .tr-len{
+    padding: 0 10px;
+}
+
+.tl-table{
+    padding: 0px 10px;
+}
+
+#th-num{
+    padding:0px 10px;
+}
+
+.tr-num{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.tr-len{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.album h2{
+    text-align: center;
+}
+
+.tl-table th{
+    border-bottom: 2px solid black;
+}
+
+/* artist */
+.artist{
+    padding: 0px 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: #F6F6F6;
+}
+
+.albums-cards{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.artist-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.artist-info img{
+    width: 100%;
+    margin:30px auto;
+    border-radius: 10px;
 }
 
 @media (max-width: 992px){
@@ -357,5 +493,17 @@ footer{
     }
     .search{
         margin: 20px auto;
+    }
+}
+
+@media (max-width:608px) {
+    .artist{
+        flex-wrap: wrap;
+    }
+    .artist img{
+        width: 60%;
+    }
+    .albums-cards{
+        justify-content: space-around;
     }
 }
