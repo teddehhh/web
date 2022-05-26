@@ -2,28 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>musculture</title>
+    <title>Новости</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script async src='/js/sIndex.js'></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet"> 
 </head>
 <body>
-    <header>
-        <div class="header-logo">
-            <img src="images/logo.png">
-            <p class="header-logo-title">musculture</p>
-        </div>
-        <nav>
-            <a class="navlink" href="index.html" title="Просмотр акутальных новостей из мира музыки"><u>Новости</u></a>
-            <span class="navsep">|</span>
-            <a class="navlink" href="artists.html" title="Полный список музыканов">Музыканты</a>
-            <span class="navsep">|</span>
-            <a class="navlink" href="albums.html" title="Полный список всех альбомов">Альбомы</a>
-        </nav>
-    </header>
+    <?php include 'header.php';?>
     <main>
         <section class="title-section">
-            <h1>Актуальные новости. <span>Среда, 1 июня</span></h1>
+            <h1>Актуальные новости. <span id=date></span></h1>
             <div class="search">
                 <img src="/images/search-icon.png" alt="">
                 <span>Что ищем?</span>
@@ -57,11 +46,11 @@
                 <div class="medium-card">
                     <div class="mc-album">
                         <img src="/images/albums/ng.jpg" alt="">
-                        <a href="/album.html">Nowhere Generation</a>
+                        <a href="/album.php">Nowhere Generation</a>
                     </div>
                     <div class="mc-artist">
                         <img src="/images/artists/rise.jpg" alt="">
-                        <a href="/artist.html">Rise Against</a>
+                        <a href="/artist.php">Rise Against</a>
                     </div>
                     <p class="mc-description">Прошло двадцать лет, а их революционный огонь все так же актуален и так же печально необходим, как и прежде.</p>
                 </div>
@@ -116,18 +105,6 @@
             </div>
         </section>
     </main>
-    <footer>
-        <div class="side-links">
-            <a href="login.html">Вход для администрирования</a>
-        </div>
-        <div class="contacts">
-            <span>Наши контакты:</span>
-            <div class="socials">
-                <a href=""><img src="/images/vk.png" alt="Вконтакте"></a>
-                <a href=""><img src="/images/telegram.png" alt="Телеграм"></a>
-                <a href=""><img src="/images/youtube.png" alt="Youtube"></a>
-            </div>
-        </div>
-    </footer>
+    <?php include 'footer.php';?>
 </body>
 </html>

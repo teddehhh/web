@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>musculture</title>
+    <title>Вход</title>
     <link rel="stylesheet" href="css/login-style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet"> 
@@ -12,7 +12,7 @@
         <h1>Вход для администрирования</h1>
         <section class="logo">
             <img src="/images/logo.png" alt="">
-            <span>musculture</span>
+            <span>music</span>
         </section>
         <section class="fields">
             <input type="text">

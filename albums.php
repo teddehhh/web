@@ -2,25 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>musculture</title>
+    <title>Альбомы</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet"> 
 </head>
 <body>
-    <header>
-        <div class="header-logo">
-            <img src="images/logo.png">
-            <p class="header-logo-title">musculture</p>
-        </div>
-        <nav>
-            <a class="navlink" href="index.html" title="Просмотр акутальных новостей из мира музыки">Новости</a>
-            <span class="navsep">|</span>
-            <a class="navlink" href="artists.html" title="Полный список музыканов">Музыканты</a>
-            <span class="navsep">|</span>
-            <a class="navlink" href="albums.html" title="Полный список всех альбомов"><u>Альбомы</u></a>
-        </nav>
-    </header>
+    <?php include 'header.php';?>
     <main>
         <section class="title-section">
             <h1>Последние релизы</h1>
@@ -106,18 +94,6 @@
             <a href="#" class="page">8</a>
         </section>
     </main>
-    <footer>
-        <div class="side-links">
-            <a href="login.html">Вход для администрирования</a>
-        </div>
-        <div class="contacts">
-            <span>Наши контакты:</span>
-            <div class="socials">
-                <a href=""><img src="/images/vk.png" alt="Вконтакте"></a>
-                <a href=""><img src="/images/telegram.png" alt="Телеграм"></a>
-                <a href=""><img src="/images/youtube.png" alt="Youtube"></a>
-            </div>
-        </div>
-    </footer>
+    <?php include 'footer.php';?>
 </body>
 </html>
