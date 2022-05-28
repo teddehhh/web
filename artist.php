@@ -5,7 +5,7 @@
     <title>Rise Against</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <script async src='/js/sArtist.js'></script>
+    <script async src='js/artist.js'></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet"> 
 </head>
 <body>
@@ -37,7 +37,10 @@
                 </div>
             </div>
             <section class="artist-info">
-                <img name="artist" src="images/artists/rise.jpg" alt="Rise Against">
+                <ul id=collage>
+                    <li id=first-img><img src="images/artists/rise.jpg" alt=""></li>
+                    <li id=second-img><img src="images/artists/rise2.jpg" alt=""></li>
+                </ul>
                 <table class="ai-table">
                     <caption>Информация об артисте</caption>
                     <tr>

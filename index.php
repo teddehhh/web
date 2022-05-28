@@ -5,7 +5,7 @@
     <title>Новости</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <script async src='/js/sIndex.js'></script>
+    <script async src='js/index.js'></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet"> 
 </head>
 <body>

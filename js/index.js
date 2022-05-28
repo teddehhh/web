@@ -22,6 +22,5 @@ function getDate(){
 }
 
 window.onload = () =>{
-    alert('hi');
     document.all.date.innerText = getDate();
 }
