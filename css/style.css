@@ -1,5 +1,10 @@
 /* general styles */
 
+*{
+    margin: 0;
+    padding: 0;
+}
+
 body{
     margin: 0;
     padding: 0;
@@ -11,8 +16,6 @@ a{
     text-decoration: none;
 }
 
-/* header */
-
 header{
     display: flex;
     flex-wrap: wrap;
@@ -21,12 +24,23 @@ header{
     padding: 50px 10%;
 }
 
+footer{
+    display: flex;
+    min-height: 50px;
+    background-color: #293240;
+    color: white;
+    padding: 10px 10%;
+    align-items: center;
+}
+
+/* surveys-page.php */
+
+/* header */
 .logo>img{
     width: 150px;
 }
 
 /* navigation */
-
 nav{
     display: flex;
     flex-wrap: wrap;
@@ -39,6 +53,48 @@ nav{
     text-align: center;
 }
 
+.survey-section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-right: 10%;
+    padding-left: 10%;
+    padding-bottom: 50px;
+    justify-content: center;
+}
+
+.survey-card{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-basis: 15%;
+    min-width: 100px;
+    height: 150px;
+    padding: 20px;
+    margin: 1%;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.survey-card hr{
+    height: 30%;
+    color: white;
+    width: 5px;
+    border-radius: 3px;
+    background-color: white;
+    margin-right: 10px;
+}
+
+
+
+/* user.php */
+
+
+/* media-queries */
+
+/* surveys-page */
 @media (max-width: 1024px){
     header{
         justify-content: center;
