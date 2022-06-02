@@ -231,3 +231,131 @@ nav{
         font-weight: 400;
     }
 }
+
+
+/* autorisation */
+/* html, body {
+	width: 100%;
+	height: 100%;
+} */
+body{
+	background-color: #E9ECEE;
+	font-family: 'Montserrat', sans-serif;
+	/* font-size: 25px; */
+
+}
+body,p,h1,span {
+	margin: 0;
+	padding: 0;
+	
+}
+.vhod h1 {
+	font-weight: Bold;
+}
+.vhod {
+	font-size: 30px;
+	box-sizing: border-box;
+	background-color: rgb(255, 255, 255);
+	/* display: flex; */
+	/* justify-content: center; */
+	/* flex-wrap: wrap; */
+	/* align-items: center; */
+	/* flex-direction: column; */
+	position: absolute;
+	left: 0;
+	right: 0;
+	max-width: 620px;
+	height: 505px;
+
+	
+	margin: 0 auto;
+	top:50%;
+	transform: translate(0,-50%);
+
+	border-radius: 20px;
+	
+	padding: 30px 50px;
+	
+}
+
+.vhod-content-head {
+	display:flex;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-bottom: 30px;
+}
+.vhod-content-head hr{
+	height: 2em;
+	color: #FF0000;
+	width: 0.33em;
+	border-radius: 10px;
+	background-color: #FF0000;
+	margin: 0;
+	margin-right: 0.5rem;
+	
+}
+.vhod-content-head h1 {
+	width: 10em;
+	font-size: 30px;
+}
+.vhod-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	position:absolute;
+	top:30px;
+}
+
+.vhod-content-item {
+	display: flex;
+	/* justify-content: center; */
+	/* flex-wrap: wrap; */
+	align-items: center;
+	margin-bottom: 30px;
+}
+.vhod-content-item input {
+	display: flex;
+	margin-left: 0.5em;
+	font-size: 25px;
+	width: 75%;
+	height: 2em;
+	/* color:#E9ECEE; */
+	opacity: .4;
+	border-radius: 6px;
+}
+
+.vhod button {
+	border: none; outline: none;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: bold;
+	display: flex;
+	margin: 0 auto;
+	margin-top: 40px;
+	justify-content: center; 
+	flex-wrap: wrap; 
+	align-items: center;
+	width: 55%;
+	height: 17%;
+	background-color: #FF0000;
+	color:white;
+	border-radius:4px;
+}
+.Btn-autorisation p {
+	font-weight: 700;
+	font-size: 25px;
+}
+
+.vhod button:hover {
+	background-color: white ;
+	color:#FF0000;
+}
+
+
+
+
+
+
+
+
