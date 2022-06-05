@@ -1,7 +1,7 @@
 <header>
     <div class="header-logo">
         <img src="images/logo.png">
-        <p class="header-logo-title">music</p>
+        <p class="header-logo-title">musculture</p>
     </div>
     <nav>
         <a class="navlink" href="index.php" title="Просмотр акутальных новостей из мира музыки">Новости</a>

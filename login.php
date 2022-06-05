@@ -8,24 +8,69 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet"> 
 </head>
 <body>
+    <?php
+        $connection=@mysqli_connect("localhost","root","pass4422","music") or die("Соединение не удалось!");
+    ?>
     <section class="login">
         <h1>Вход для администрирования</h1>
         <section class="logo">
             <img src="/images/logo.png" alt="">
-            <span>music</span>
+            <span>musculture</span>
         </section>
-        <section class="fields">
-            <input type="text">
-            <input type="text">
-        </section>
-        <section class="buttons">
-            <button>
-                <span>Вернуться</span>
-            </button>
-            <button class="enter">
-                <img src="/images/arrow.png">
-            </button>
-        </section>
+        <form action="" method="POST">
+            <section class="fields">
+                <input placeholder="Логин" type="text" name="username">
+                <input placeholder="Пароль" type="password" name="password">
+            </section>
+            <section class="buttons">
+                <a class="enter-btn" href="index.php"><span>&#8249;</span>Вернуться</a>
+                <div class="side-buttons">
+                    <button class="enter-btn" name="enter" type="submit">Вход</button>
+                    <button class="enter-btn" name="reg" type="submit">Регистрация</button>
+                </div>
+            </section>
+        </form>
+        <?php
+            if(isset($_POST['enter'])){
+                if(empty($_POST['username']) or empty($_POST['password'])){
+                    ?><span class="fault-msg">Проверьте введенные данные</span><?php
+                    exit();
+                }
+                $username=$_POST['username'];
+                $password=$_POST['password'];
+
+                $dataq=mysqli_query($connection,"SELECT Hash, Salt FROM Users WHERE Username='$username'");
+                $dataObj=mysqli_fetch_object($dataq);
+                $actual_hash=$dataObj->Hash;
+                $actual_salt=$dataObj->Salt;
+
+                $actual_password=$actual_salt.$password;
+                $cur_hash=password_hash($actual_password,PASSWORD_DEFAULT);
+
+                if(password_verify($actual_password,$actual_hash)):
+                    ?><span class='success-msg'>Вход выполнен</span><?php
+                else:
+                    ?><span class='fault-msg'>Проверьте данные</span><?php
+                endif;}
+                elseif (isset($_POST['reg'])){
+                if(empty($_POST['username']) or empty($_POST['password'])){
+                    ?><span class="fault-msg">Проверьте введенные данные</span><?php
+                    exit();
+                }
+                $username=$_POST['username'];
+                $password=$_POST['password'];
+
+                $salt=bin2hex(random_bytes(5));
+                $salted_password=$salt.$password;
+                $hash=password_hash($salted_password,PASSWORD_DEFAULT);
+                
+                if ($connection->query("INSERT INTO Users(username,salt,hash) VALUES('$username','$salt','$hash')")===TRUE):
+                ?>  <span class="success-msg"><?php echo "Новый пользователь зарегистрирован";?></span>
+                <?php
+                else:
+                ?>  <span class="fault-msg"><?php echo "Ошибка регистрации"?></span>
+            <?php endif;
+            }?>
     </section>
 </body>
 </html>

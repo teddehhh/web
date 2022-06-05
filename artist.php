@@ -11,8 +11,16 @@
 <body>
     <?php include 'header.php';?>
     <main>
+        <?php
+            $connection=@mysqli_connect("localhost","muspublic","","music") or die("Соединение не удалось");
+        ?>
         <section class="title-section">
-            <h1>Rise Against</h1>
+            <?php
+                $id=$_GET['artistid'];
+                $artistq=mysqli_query($connection,"SELECT * FROM artist WHERE ArtistID=$id");
+                $artistObj=mysqli_fetch_object($artistq);
+            ?>
+            <h1><?php echo $artistObj->Name?></h1>
             <div class="search">
                 <img src="images/search-icon.png" alt="">
                 <span>Что ищем?</span>
@@ -22,50 +30,63 @@
             <div class="artist-albums">
                 <h2>Альбомы артиста:</h2>
                 <div class="albums-cards">
-                    <div class="little-card">
-                        <img src="/images/albums/frtwte.jpg" alt="">
-                        <p>For Those That Wish to Exist</p>
-                    </div>
-                    <div class="little-card">
-                        <img src="/images/albums/LMTFNoEternityInGold.jpg" alt="">
-                        <p>No Eternity in Gold</p>
-                    </div>
-                    <a href="/album.php" class="little-card">
-                        <img src="/images/albums/ng.jpg" alt="">
-                        <p>Nowhere Generation</p>
-                    </a>
+                    <?php
+                        $albumsq=mysqli_query($connection, "SELECT Title, ImgPath FROM albumartist JOIN Album ON albumartist.AlbumID=album.AlbumID JOIN albumimage on albumimage.AlbumID=album.AlbumID WHERE albumartist.ArtistID=$id");
+                        while($album=mysqli_fetch_object($albumsq)):
+                            ?>
+                            <a class="little-card">
+                                <img src="<?php echo $album->ImgPath?>" alt="">
+                                <p><?php echo $album->Title?></p>
+                            </a>
+                        <?php endwhile;?>
                 </div>
             </div>
             <section class="artist-info">
                 <ul id=collage>
-                    <li id=first-img><img src="images/artists/rise.jpg" alt=""></li>
-                    <li id=second-img><img src="images/artists/rise2.jpg" alt=""></li>
+                    <?php
+                        $imgsq=mysqli_query($connection, "SELECT ImgPath FROM artistimage WHERE ArtistID=$id AND IsMain=TRUE");
+                        $mainimg=mysqli_fetch_object($imgsq);
+                        ?>
+                        <li id=first-img><img src="<?php echo $mainimg->ImgPath?>" alt=""></li>
+                        <?php
+                            $artimages=mysqli_query($connection,"SELECT ImgPath FROM artistimage WHERE ArtistID=$id AND IsMain=FALSE");
+                            while($img=mysqli_fetch_object($artimages)):
+                                ?>
+                                <li id=second-img><img src="<?php echo $img->ImgPath?>" alt=""></li>
+                            <?php endwhile;?>
                 </ul>
                 <table class="ai-table">
                     <caption>Информация об артисте</caption>
                     <tr>
+                        <?php 
+                            $countryq=mysqli_query($connection,"SELECT * FROM Country WHERE CountryID=$artistObj->CountryID");
+                            $countryObj=mysqli_fetch_object($countryq);
+                            $genresq=mysqli_query($connection,"SELECT DISTINCT Name FROM Genre 
+                                                                            JOIN AlbumArtist ON AlbumArtist.ArtistID=$artistObj->ArtistID 
+                                                                            JOIN Album ON Album.AlbumID=AlbumArtist.AlbumID
+                                                                            WHERE Genre.GenreID=Album.GenreID LIMIT 3");
+                            ?>
                         <th>Дата рождения/основания:</th>
-                        <td>1 декабря, 1999</td>
+                        <td><?php echo $artistObj->Birthday?></td>
                     </tr>
                     <tr>
                         <th>Страна:</th>
-                        <td>США</td>
+                        <td><?php echo $countryObj->Name?></td>
                     </tr>
                     <tr>
                         <th>Жанры:</th>
-                        <td>Панк-рок; мелодик-хардкор; хардкор-панк</td>
-                    </tr>
-                    <tr>
-                        <th>Состав группы:</th>
-                        <td>Тим Макилрот;
-                            Джо Принсипи;
-                            Брэндон Барнс;
-                            Зак Блэр</td>
+                        <td><?php
+                                while($genre=mysqli_fetch_object($genresq)):
+                                    ?>
+                                    <?php echo $genre->Name?>
+                                <?php endwhile;?>
+                        </td>
                     </tr>
                 </table>
             </section>
         </section>
     </main>
     <?php include 'footer.php';?>
+    <?php mysqli_close($connection);?>
 </body>
 </html>

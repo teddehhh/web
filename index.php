@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet"> 
 </head>
 <body>
+    <?php 
+        $connection=@mysqli_connect("localhost","muspublic","","music") or die("Соединение не удалось");
+    ?>
     <?php include 'header.php';?>
     <main>
         <section class="title-section">
@@ -21,90 +24,53 @@
         <section class="main-news">
             <h2>Главные события:</h2>
             <div class="cards">
-                <div class="medium-card">
-                    <div class="mc-album">
-                        <img src="/images/albums/misser.png" alt="">
-                        <p class="mc-title">Misery Sermon</p>
-                    </div>
-                    <div class="mc-artist">
-                        <img src="/images/artists/sltopr.jpg" alt="">
-                        <p>Slaughter to Prevail</p>
-                    </div>
-                    <p class="mc-description">Международный дебют российской дектор-команды.</p>
-                </div>
-                <div class="medium-card">
-                    <div class="mc-album">
-                        <img src="/images/albums/hfk.png" alt="">
-                        <p class="mc-title">Hopeless Fountain Kingdom</p>
-                    </div>
-                    <div class="mc-artist">
-                        <img src="/images/artists/halsey.jpg" alt="">
-                        <p>Halsey</p>
-                    </div>
-                    <p class="mc-description">Стремительное взросление вчерашней тинейджер-звезды продолжается на ее втором релизе «Hopeless Fountain Kingdom».</p>
-                </div>
-                <div class="medium-card">
-                    <div class="mc-album">
-                        <img src="/images/albums/ng.jpg" alt="">
-                        <a href="/album.php">Nowhere Generation</a>
-                    </div>
-                    <div class="mc-artist">
-                        <img src="/images/artists/rise.jpg" alt="">
-                        <a href="/artist.php">Rise Against</a>
-                    </div>
-                    <p class="mc-description">Прошло двадцать лет, а их революционный огонь все так же актуален и так же печально необходим, как и прежде.</p>
-                </div>
-                <div class="medium-card">
-                    <div class="mc-album">
-                        <img src="/images/albums/trinme.jpg" alt="">
-                        <p class="mc-title">Trust in Me</p>
-                    </div>
-                    <div class="mc-artist">
-                        <img src="/images/artists/Direct_2019.jpg" alt="">
-                        <p>Direct</p>
-                    </div>
-                    <p class="mc-description">Trust In Me - это альбом в стиле “chillout” от Direct, Mr FijiWiji and Holly Drummond.</p>
-                </div>
+                <?php
+                    $newsq=mysqli_query($connection,"SELECT * FROM news WHERE PRIORITY!=0 ORDER BY PRIORITY");
+                    while($news=mysqli_fetch_object($newsq)):
+                        $albumq=mysqli_query($connection,"SELECT * FROM album WHERE AlbumID=$news->AlbumID");
+                        $album=mysqli_fetch_object($albumq);
+
+                        $artistq=mysqli_query($connection,"SELECT * from artist JOIN albumartist ON albumartist.ArtistID=artist.ArtistID WHERE albumartist.AlbumID=$album->AlbumID");
+                        $artistObj=mysqli_fetch_object($artistq);
+
+                        $albImgq=mysqli_query($connection,"SELECT ImgPath FROM AlbumImage WHERE AlbumID=$news->AlbumID");
+                        $albImgObj=mysqli_fetch_object($albImgq);
+
+                        $artImgq=mysqli_query($connection,"SELECT ImgPath FROM ArtistImage WHERE ArtistID=$artistObj->ArtistID AND IsMain IS TRUE");
+                        $artImgObj=mysqli_fetch_object($artImgq);
+                        ?>
+                        <div class="medium-card">
+                            <div class="mc-album">
+                                <img src="<?php echo $albImgObj->ImgPath?>" alt="">
+                                <a href="/album.php?albumid=<?php echo $album->AlbumID?>" class="mc-title"><?php echo $album->Title?></a>
+                            </div>
+                            <div class="mc-artist">
+                                <img src="<?php echo $artImgObj->ImgPath?>" alt="">
+                                <a href="/artist.php?artistid=<?php echo $artistObj->ArtistID?>"><?php echo $artistObj->Name?></a>
+                            </div>
+                            <p class="mc-description"><?php echo $news->Info?></p>
+                        </div>
+                <?php endwhile?>
             </div>
         </section>
         <section class="last-news">
             <h2>Из последнего:</h2>
             <div class="ln-cards">
-                <div class="little-card">
-                    <img src="/images/albums/frtwte.jpg" alt="">
-                    <p>For Those That Wish to Exist</p>
-                </div>
-                <div class="little-card">
-                    <img src="/images/albums/LMTFNoEternityInGold.jpg" alt="">
-                    <p>No Eternity in Gold</p>
-                </div>
-                <div class="little-card">
-                    <img src="/images/albums/mcin5.jpg" alt="">
-                    <p>Monstercat Instinct Vol.5</p>
-                </div>
-                <div class="little-card">
-                    <img src="/images/albums/that'sspirit.jpg" alt="">
-                    <p>That's Spirit</p>
-                </div>
-                <div class="little-card">
-                    <img src="/images/albums/noise.jpg" alt="">
-                    <p>N / O / I / S / E</p>
-                </div>
-                <div class="little-card">
-                    <img src="/images/albums/hosh.jpg" alt="">
-                    <p>Хошхоног</p>
-                </div>
-                <div class="little-card">
-                    <img src="/images/albums/wind.jpg" alt="">
-                    <p>Круг Ветров</p>
-                </div>
-                <div class="little-card">
-                    <img src="/images/albums/wild-youth.jpg" alt="">
-                    <p>Wild Youth</p>
-                </div>
+                <?php
+                    $lastAlbumsq=mysqli_query($connection,"SELECT AlbumID,Title FROM album ORDER BY AlbumID DESC LIMIT 8");
+                    while($lastAlbum=mysqli_fetch_object($lastAlbumsq)):
+                        $lastAlbImgq=mysqli_query($connection,"SELECT ImgPath FROM AlbumImage WHERE AlbumID=$lastAlbum->AlbumID");
+                        $lastAlbImgObj=mysqli_fetch_object($lastAlbImgq);
+                        ?>
+                        <div class="little-card">
+                            <img src="<?php echo $lastAlbImgObj->ImgPath?>" alt="">
+                            <p><?php echo $lastAlbum->Title?></p>
+                        </div>
+                    <?php endwhile;?>
             </div>
         </section>
     </main>
     <?php include 'footer.php';?>
+    <?php mysqli_close($connection)?>
 </body>
 </html>
