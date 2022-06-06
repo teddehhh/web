@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rise Against</title>
+    <title>Artist</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <script async src='js/artist.js'></script>
@@ -12,7 +12,16 @@
     <?php include 'header.php';?>
     <main>
         <?php
-            $connection=@mysqli_connect("localhost","muspublic","","music") or die("Соединение не удалось");
+            $connection;
+            $isAdmin = false;
+            session_start();
+            if(isset($_SESSION["role"])){
+                $connection=@mysqli_connect("localhost","musadmin1","1","music") or die("Соединение не удалось");
+                $isAdmin = true;
+            }
+            else{
+                $connection=@mysqli_connect("localhost","muspublic","","music") or die("Соединение не удалось");
+            }
         ?>
         <section class="title-section">
             <?php
@@ -55,6 +64,9 @@
                                 <li id=second-img><img src="<?php echo $img->ImgPath?>" alt=""></li>
                             <?php endwhile;?>
                 </ul>
+                <?php if($isAdmin):
+                        ?><form action="" method="POST">
+                    <?php endif;?>
                 <table class="ai-table">
                     <caption>Информация об артисте</caption>
                     <tr>
@@ -67,7 +79,13 @@
                                                                             WHERE Genre.GenreID=Album.GenreID LIMIT 3");
                             ?>
                         <th>Дата рождения/основания:</th>
-                        <td><?php echo $artistObj->Birthday?></td>
+                        <td><?php
+                                if($isAdmin):?>
+                                    <input type="date" name="birthday" value="<?php echo $artistObj->Birthday?>">
+                                    <?php
+                                else:
+                                    echo $artistObj->Birthday?></td>
+                            <?php endif;?>
                     </tr>
                     <tr>
                         <th>Страна:</th>
@@ -83,10 +101,20 @@
                         </td>
                     </tr>
                 </table>
+                <?php if($isAdmin):?>
+                        <button class="save-btn" name="save" type="submit">Сохранить</button>
+                        </form>
+                <?php endif;?>
             </section>
         </section>
     </main>
     <?php include 'footer.php';?>
-    <?php mysqli_close($connection);?>
+    <?php if(isset($_POST["save"])):
+                $birthday=$_POST["birthday"];
+                $artistid=$_GET["artistid"];
+                $updateq=mysqli_query($connection,"UPDATE Artist SET Birthday='$birthday' WHERE ArtistID=$artistid"); 
+                echo "<meta http-equiv='refresh' content='0'>";
+            endif;
+            mysqli_close($connection);?>
 </body>
 </html>

@@ -23,7 +23,7 @@
                 <input placeholder="Пароль" type="password" name="password">
             </section>
             <section class="buttons">
-                <a class="enter-btn" href="index.php"><span>&#8249;</span>Вернуться</a>
+                <a class="enter-btn" href="index.php"><span>&#8249;</span>Главная</a>
                 <div class="side-buttons">
                     <button class="enter-btn" name="enter" type="submit">Вход</button>
                     <button class="enter-btn" name="reg" type="submit">Регистрация</button>
@@ -41,6 +41,12 @@
 
                 $dataq=mysqli_query($connection,"SELECT Hash, Salt FROM Users WHERE Username='$username'");
                 $dataObj=mysqli_fetch_object($dataq);
+
+                if($dataObj==null):
+                    ?><span class="fault-msg">Пользователь не найден</span><?php
+                    exit();
+                endif;
+                
                 $actual_hash=$dataObj->Hash;
                 $actual_salt=$dataObj->Salt;
 
@@ -48,7 +54,9 @@
                 $cur_hash=password_hash($actual_password,PASSWORD_DEFAULT);
 
                 if(password_verify($actual_password,$actual_hash)):
-                    ?><span class='success-msg'>Вход выполнен</span><?php
+                    session_start();
+                    $_SESSION["role"]="admin";
+                    header("Location:index.php");
                 else:
                     ?><span class='fault-msg'>Проверьте данные</span><?php
                 endif;}

@@ -111,6 +111,28 @@ nav{
     font-weight: lighter;
 }
 
+.user-bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #FF6565;
+    height: 50px;
+    width: 100px;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+
+.user-bar button{
+    display: flex;
+    align-items: center;
+    background-color: inherit;
+    border: 0px ;
+}
+
+.user-bar button:hover{
+    cursor:pointer;
+}
+
 /* footer */
 footer{
     display: flex;
@@ -256,6 +278,63 @@ footer{
 
 .little-card p{
     margin-left: 5%;
+}
+
+.edit-field{
+    width: 75%;
+    line-height: normal;
+    resize: none;
+    color: white;
+    background-color: #535353;
+    font-family: 'Inter', sans-serif; 
+    font-size: 12px;
+    border: 0px;
+    padding: 10px;
+    margin: 10px;
+    margin-left: 0;
+}
+
+.save-btn, .delete-btn{
+    margin: 5px;
+    padding: 5px;
+    background-color: #6d6d6d;
+    border: 0px;
+    border-radius: 5px;
+    height: 30px;
+    width: 30px;
+}
+
+.save-btn img, .delete-btn img{
+    width: 20px;
+}
+
+.medium-card form{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.add-form{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.add-form input{
+    font-family: 'Inter', sans-serif; 
+    padding: 5px;
+    background-color: #363636;
+    border: 0px;
+    border-radius: 5px;
+    color: white;
+}
+
+.news-text-add{
+    resize: none;
 }
 
 /* albums.html */
@@ -454,6 +533,15 @@ footer{
 
 .tl-table th{
     border-bottom: 2px solid black;
+}
+
+.ai-table .save-btn{
+    border: 0px;
+    background-color: #282828;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    padding: 10px;
+    margin-top: 20px;
 }
 
 /* artist */

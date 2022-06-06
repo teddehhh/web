@@ -9,8 +9,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet"> 
 </head>
 <body>
-    <?php 
-        $connection=@mysqli_connect("localhost","muspublic","","music") or die("Соединение не удалось");
+    <?php
+        if(isset($_POST["logout"])):
+            session_start();
+            $_SESSION=array();
+            header("Location:login.php");
+        endif;
+    ?>
+    <?php
+        $connection;
+        $isAdmin = false;
+        session_start();
+        if(isset($_SESSION["role"])){
+            $connection=@mysqli_connect("localhost","musadmin1","1","music") or die("Соединение не удалось");
+            $isAdmin = true;
+        }
+        else{
+            $connection=@mysqli_connect("localhost","muspublic","","music") or die("Соединение не удалось");
+        }
     ?>
     <?php include 'header.php';?>
     <main>
@@ -20,6 +36,15 @@
                 <img src="/images/search-icon.png" alt="">
                 <span>Что ищем?</span>
             </div>
+            <?php
+                if($isAdmin==true):
+                    ?><div class="user-bar">
+                        <img src="/images/admin.png" alt="">
+                        <form method="POST">
+                            <button type="submit" name="logout"><img src="/images/exit.png" alt=""></button>
+                        </form>
+                    </div>
+            <?php endif;?>
         </section>
         <section class="main-news">
             <h2>Главные события:</h2>
@@ -48,9 +73,48 @@
                                 <img src="<?php echo $artImgObj->ImgPath?>" alt="">
                                 <a href="/artist.php?artistid=<?php echo $artistObj->ArtistID?>"><?php echo $artistObj->Name?></a>
                             </div>
-                            <p class="mc-description"><?php echo $news->Info?></p>
+                            <?php 
+                                if($isAdmin):?>
+                                    <form action="" method="POST">
+                                        <input type="hidden" name="formname" value="<?php echo $news->NewsID?>">
+                                        <textarea class="edit-field" name="edit-text"><?php echo $news->Info?></textarea>
+                                        <div class="news-control">
+                                            <button class="save-btn" type="submit" name="save-card">
+                                                <img src="/images/save.png" alt="">
+                                            </button>
+                                            <button class="delete-btn" type="submit" name="delete-card">
+                                                <img src="/images/delete.png" alt="">
+                                            </button>
+                                        </div>
+                                    </form>
+                                <?php
+                                else:?>
+                                    <p class="mc-description"><?php echo $news->Info?></p>
+                                <?php
+                                endif;?>
+                                
                         </div>
-                <?php endwhile?>
+                <?php
+                    endwhile;
+                    if($isAdmin):?>
+                        <div class="medium-card">
+                            <form class="add-form" action="" method="POST" name="add-news">
+                                <Label>Выберите альбом:</Label>
+                                <select name="album" id="album">
+                                    <?php
+                                        $albumsq=mysqli_query($connection,"SELECT * FROM Album");
+                                        while($albumSelected=mysqli_fetch_object($albumsq)):?>
+                                            <option value="<?php echo $albumSelected->AlbumID?>">
+                                                <?php echo $albumSelected->Title?>
+                                            </option>
+                                    <?php endwhile;?>
+                                </select>
+                                <Label>Введите текст новости:</Label>
+                                <textarea class="news-text-add" name="news-text-add" id="news-text"></textarea>
+                                <input name="add-news" type="submit" value="Добавить">
+                            </form>
+                        </div>
+                <?php endif;?>
             </div>
         </section>
         <section class="last-news">
@@ -71,6 +135,27 @@
         </section>
     </main>
     <?php include 'footer.php';?>
-    <?php mysqli_close($connection)?>
+    <?php 
+        if(isset($_POST["save-card"])):
+            $info=$_POST["edit-text"];
+            $id=intval($_POST["formname"]);
+            $updateq=mysqli_query($connection,"UPDATE News SET Info='$info' WHERE NewsID=$id");
+            echo "<meta http-equiv='refresh' content='0'>";
+        elseif(isset($_POST["delete-card"])):
+            $info=$_POST["edit-text"];
+            $id=intval($_POST["formname"]);
+            $deleteq=mysqli_query($connection,"DELETE FROM News WHERE NewsID=$id");
+            echo "<meta http-equiv='refresh' content='0'>";
+        endif;
+        if(isset($_POST["add-news"])):
+            $albumid=$_POST["album"];
+            $text=$_POST["news-text-add"];
+            $priorityq=mysqli_query($connection,"SELECT MAX(PRIORITY) as value FROM News");
+            $priorityObj=mysqli_fetch_object($priorityq);
+            $maxPriority=$priorityObj->value;
+            $addnewsq=mysqli_query($connection,"INSERT INTO News(AlbumID, Info, Priority) VALUES($albumid,'$text',$maxPriority)");
+            echo "<meta http-equiv='refresh' content='0'>";
+        endif;
+        mysqli_close($connection);?>
 </body>
 </html>
