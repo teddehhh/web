@@ -1,5 +1,4 @@
 /* general styles */
-
 *{
     margin: 0;
     padding: 0;
@@ -221,6 +220,7 @@ nav{
         justify-content: center;
         flex-direction: column;
     }
+    div+span
     nav{
         justify-content: center;
         margin: 10px auto;
@@ -322,7 +322,7 @@ body,p,h1,span {
 	width: 75%;
 	height: 2em;
 	/* color:#E9ECEE; */
-	opacity: .4;
+	/* opacity: .4; */
 	border-radius: 6px;
 }
 
@@ -348,13 +348,23 @@ body,p,h1,span {
 }
 
 .vhod button:hover {
-	background-color: white ;
+	background-color: white;
 	color:#FF0000;
+    border: 3px red solid;
 }
 
+.vhod input,.vhod input::placeholder{
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #0F2232;
+}
 
-
-
+.vhod input{
+    height: 40px;
+    border: 2px #E9ECEE solid;
+    padding-left:10px;
+}
 
 
 

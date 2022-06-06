@@ -12,7 +12,7 @@
         <div class="user-info">
             <span class="title-info">Персональная информация</span>
             <div class="info-card">
-                <img src="/images/push.jpg" alt="">
+                <img src="images/push.jpg" alt="">
                 <ul>
                     <li>
                         <p class="header-info">ФИО</p>
@@ -37,22 +37,22 @@
             <span class="title-info">Статистика</span>
             <div class="stat-cards">
                 <div class="stat-card">
-                    <img src="/images/count.png" alt="">
+                    <img src="images/count.png" alt="">
                     <p class="value-stat">14</p>
                     <p class="about-stat">пройденных опросов</p>
                 </div>
                 <div class="stat-card">
-                    <img src="/images/smile.png" alt="">
+                    <img src="images/smile.png" alt="">
                     <p class="value-stat">улитка</p>
                     <p class="about-stat">часто используемый смайлик</p>
                 </div>
                 <div class="stat-card">
-                    <img src="/images/clock.png" alt="">
+                    <img src="images/clock.png" alt="">
                     <p class="value-stat">4:42</p>
                     <p class="about-stat">среднее время прохождения опроса</p>
                 </div>
                 <div class="stat-card">
-                    <img src="/images/group.png" alt="">
+                    <img src="images/group.png" alt="">
                     <p class="value-stat">рекламное подразделение</p>
                     <p class="about-stat">самое активное подразделение</p>
                 </div>
