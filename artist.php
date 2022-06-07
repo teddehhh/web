@@ -15,8 +15,8 @@
             $connection;
             $isAdmin = false;
             session_start();
-            if(isset($_SESSION["role"])){
-                $connection=@mysqli_connect("localhost","musadmin1","1","music") or die("Соединение не удалось");
+            if(isset($_SESSION["role"]) && $_SESSION["role"]="admin"){
+                $connection=@mysqli_connect("localhost","musadmin","sec1","music") or die("Соединение не удалось");
                 $isAdmin = true;
             }
             else{
@@ -30,17 +30,17 @@
                 $artistObj=mysqli_fetch_object($artistq);
             ?>
             <h1><?php echo $artistObj->Name?></h1>
-            <div class="search">
+            <!-- <div class="search">
                 <img src="images/search-icon.png" alt="">
                 <span>Что ищем?</span>
-            </div>
+            </div> -->
         </section>
         <section class="artist">
             <div class="artist-albums">
                 <h2>Альбомы артиста:</h2>
                 <div class="albums-cards">
                     <?php
-                        $albumsq=mysqli_query($connection, "SELECT Title, ImgPath FROM albumartist JOIN Album ON albumartist.AlbumID=album.AlbumID JOIN albumimage on albumimage.AlbumID=album.AlbumID WHERE albumartist.ArtistID=$id");
+                        $albumsq=mysqli_query($connection, "SELECT Title, ImgPath FROM albumartist JOIN album ON albumartist.AlbumID=album.albumID JOIN albumimage on albumimage.AlbumID=album.AlbumID WHERE albumartist.ArtistID=$id");
                         while($album=mysqli_fetch_object($albumsq)):
                             ?>
                             <a class="little-card">
@@ -71,12 +71,12 @@
                     <caption>Информация об артисте</caption>
                     <tr>
                         <?php 
-                            $countryq=mysqli_query($connection,"SELECT * FROM Country WHERE CountryID=$artistObj->CountryID");
+                            $countryq=mysqli_query($connection,"SELECT * FROM country WHERE CountryID=$artistObj->CountryID");
                             $countryObj=mysqli_fetch_object($countryq);
-                            $genresq=mysqli_query($connection,"SELECT DISTINCT Name FROM Genre 
-                                                                            JOIN AlbumArtist ON AlbumArtist.ArtistID=$artistObj->ArtistID 
-                                                                            JOIN Album ON Album.AlbumID=AlbumArtist.AlbumID
-                                                                            WHERE Genre.GenreID=Album.GenreID LIMIT 3");
+                            $genresq=mysqli_query($connection,"SELECT DISTINCT Name FROM genre 
+                                                                            JOIN albumartist ON albumartist.ArtistID=$artistObj->ArtistID 
+                                                                            JOIN album ON album.AlbumID=albumartist.AlbumID
+                                                                            WHERE genre.GenreID=album.GenreID LIMIT 3");
                             ?>
                         <th>Дата рождения/основания:</th>
                         <td><?php
@@ -112,7 +112,7 @@
     <?php if(isset($_POST["save"])):
                 $birthday=$_POST["birthday"];
                 $artistid=$_GET["artistid"];
-                $updateq=mysqli_query($connection,"UPDATE Artist SET Birthday='$birthday' WHERE ArtistID=$artistid"); 
+                $updateq=mysqli_query($connection,"UPDATE artist SET Birthday='$birthday' WHERE ArtistID=$artistid"); 
                 echo "<meta http-equiv='refresh' content='0'>";
             endif;
             mysqli_close($connection);?>

@@ -27,10 +27,10 @@ h1 span{
 }
 
 h2{
-    font-size: 24px;
-    margin: 0;
     padding-top:30px;
     padding-bottom:30px;
+    margin: 0;
+    font-size: 24px;
 }
 
 th{
@@ -47,22 +47,21 @@ header{
     padding-right: 5%;
     padding-left: 5%;
     margin: 50px 5%;
-    background-color: #282828;
     border-radius: 10px;
+    background-color: #282828;
 }
-
 
 .header-logo{
     display: flex;
     align-items: center;
-    font-size: 20px;
     margin-right: 10px;
+    font-size: 20px;
 }
 
 nav{
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
+    justify-content: center;
     font-size: 14px;
 }
 
@@ -77,9 +76,9 @@ nav{
 /* first-section */
 .title-section{
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     padding-right: 5%;
     padding-left: 5%;
     margin-bottom: 15px;
@@ -91,13 +90,13 @@ nav{
 
 .search{
     display: flex;
-    align-items: center;
     flex-grow: 1;
+    align-items: center;
     height: 50px;
     max-width: 300px;
     border-radius: 10px;
-    background-color: #F4F4F4;
     border: #282828 2px solid;
+    background-color: #F4F4F4;
 }
 
 .search img{
@@ -105,8 +104,8 @@ nav{
 }
 
 .search span{
-    font-size: 15px;
     margin-right: 10px;
+    font-size: 15px;
     font-style: italic;
     font-weight: lighter;
 }
@@ -115,18 +114,18 @@ nav{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    background-color: #FF6565;
     height: 50px;
     width: 100px;
     margin-left: 10px;
     border-radius: 10px;
+    background-color: #FF6565;
 }
 
 .user-bar button{
     display: flex;
     align-items: center;
     background-color: inherit;
-    border: 0px ;
+    border: 0px;
 }
 
 .user-bar button:hover{
@@ -137,12 +136,12 @@ nav{
 footer{
     display: flex;
     flex-wrap: wrap;
+    flex: 0 0 auto;
     justify-content:space-between;
     align-items: center;
+    height: 200px;
     padding-right: 5%;
     padding-left: 5%;
-    height: 200px;
-    flex: 0 0 auto;
 }
 
 .side-links{
@@ -160,9 +159,9 @@ footer{
 }
 
 .socials{
-    width: 150px;
     display: flex;
     justify-content: space-between;
+    width: 150px;
 }
 
 .side-links a{
@@ -171,16 +170,16 @@ footer{
 
 /* main-news */
 .main-news{
-    background-color: #799DB1;
     padding-left: 5%;
     padding-right: 5%;
     padding-bottom: 50px;
+    background-color: #799DB1;
 }
 
 .cards{
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .last-news{
@@ -197,21 +196,21 @@ footer{
 
 /* cards */
 .medium-card{
+    display: flex;
+    flex-direction: column;
     flex-basis: 300px;
     flex-grow: 1;
     padding: 10px;
     margin: 5px;
-    display: flex;
-    flex-direction: column;
-    color: white;
-    background-color: #282828;
     border-radius: 10px;
+    background-color: #282828;
+    color: white;
 }
 
 .medium-card:hover{
-    background-color: #4a5d68;
-    border:2px solid #282828;
     margin:3px;
+    border:2px solid #282828;
+    background-color: #4a5d68;
 }
 
 .medium-card p{
@@ -229,8 +228,8 @@ footer{
 }
 
 .mc-album a{
-    font-weight: bold;
     margin: 10px auto;
+    font-weight: bold;
 }
 
 .mc-artist{
@@ -240,8 +239,8 @@ footer{
 
 .mc-artist img{
     width: 10%;
-    border-radius: 100px;
     margin-left: 3%;
+    border-radius: 100px;
 }
 
 .mc-artist a{
@@ -250,23 +249,23 @@ footer{
 }
 
 .little-card{
-    flex-basis: 200px;
-    padding: 10px;
-    margin: 5px;
     display: flex;
     flex-direction: row;
+    flex-basis: 200px;
     align-items: center;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
     background-color: #282828;
     color: white;
-    border-radius: 10px;
 }
 
 .little-card:hover{
-    background-color: #F6F6F6;
-    color:#282828;
+    margin: 3px;
     font-weight: 600;
     border: 2px solid #B1B1B1;
-    margin: 3px;
+    background-color: #F6F6F6;
+    color:#282828;
 }
 .little-card:active{
     background-color: #a8a8a8;
@@ -281,27 +280,27 @@ footer{
 }
 
 .edit-field{
-    width: 75%;
     line-height: normal;
     resize: none;
-    color: white;
-    background-color: #535353;
-    font-family: 'Inter', sans-serif; 
-    font-size: 12px;
-    border: 0px;
+    width: 75%;
     padding: 10px;
     margin: 10px;
     margin-left: 0;
+    font-size: 12px;
+    font-family: 'Inter', sans-serif; 
+    border: 0px;
+    background-color: #535353;
+    color: white;
 }
 
 .save-btn, .delete-btn{
-    margin: 5px;
-    padding: 5px;
-    background-color: #6d6d6d;
-    border: 0px;
-    border-radius: 5px;
     height: 30px;
     width: 30px;
+    margin: 5px;
+    padding: 5px;
+    border: 0px;
+    border-radius: 5px;
+    background-color: #6d6d6d;
 }
 
 .save-btn img, .delete-btn img{
@@ -310,27 +309,27 @@ footer{
 
 .medium-card form{
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .add-form{
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+    height: 100%;
 }
 
 .add-form input{
-    font-family: 'Inter', sans-serif; 
     padding: 5px;
-    background-color: #363636;
     border: 0px;
     border-radius: 5px;
+    font-family: 'Inter', sans-serif; 
     color: white;
+    background-color: #363636;
 }
 
 .news-text-add{
@@ -359,14 +358,14 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 25px;
+    height: 25px;
     padding: 5px;
     margin-left: 10px;
     margin-bottom: 5px;
+    border-radius: 5px;
     background-color: #282828;
     color: white;
-    border-radius: 5px;
-    width: 25px;
-    height: 25px;
 }
 
 .page a{
@@ -385,13 +384,13 @@ footer{
 .artist-card{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     flex-basis: 200px;
+    justify-content: center;
     align-items: center;
-    background-color: #818181;
-    border-radius: 10px;
-    margin: 10px;
     padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #818181;
 }
 
 .artist-card:hover{
@@ -415,16 +414,16 @@ footer{
 /* album */
 .album{
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
+    justify-content: space-around;
     padding: 0 5%;
 }
 
 .album-info{
     display: flex;
     flex-direction: column;
-    align-items: center;
     flex-basis: 30%;
+    align-items: center;
 }
 
 .album-info>img{
@@ -436,10 +435,10 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: #282828 2px solid;
-    border-radius: 10px;
     padding: 10px;
     margin:10px auto;
+    border-radius: 10px;
+    border: #282828 2px solid;
 }
 
 .artist-link:hover{
@@ -536,21 +535,21 @@ footer{
 }
 
 .ai-table .save-btn{
+    padding: 10px;
+    margin-top: 20px;
+    font-family: 'Inter', sans-serif;
     border: 0px;
     background-color: #282828;
     color: white;
-    font-family: 'Inter', sans-serif;
-    padding: 10px;
-    margin-top: 20px;
 }
 
 /* artist */
 .artist{
-    padding: 0px 5%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background-color: #F6F6F6;
+    padding: 0px 5%;
 }
 
 .albums-cards{
@@ -561,13 +560,13 @@ footer{
 .artist-info{
     display: flex;
     flex-direction: column;
-    align-items: center;
     flex-basis: 40%;
+    align-items: center;
 }
 
 #collage {
-    list-style-type: none;
     position: relative;
+    list-style-type: none;
 }
 
 #collage li{

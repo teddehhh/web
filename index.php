@@ -20,8 +20,8 @@
         $connection;
         $isAdmin = false;
         session_start();
-        if(isset($_SESSION["role"])){
-            $connection=@mysqli_connect("localhost","musadmin1","1","music") or die("Соединение не удалось");
+        if(isset($_SESSION["role"]) && $_SESSION["role"]="admin"){
+            $connection=@mysqli_connect("localhost","musadmin","sec1","music") or die("Соединение не удалось");
             $isAdmin = true;
         }
         else{
@@ -32,10 +32,10 @@
     <main>
         <section class="title-section">
             <h1>Актуальные новости. <span id=date></span></h1>
-            <div class="search">
+            <!-- <div class="search">
                 <img src="/images/search-icon.png" alt="">
                 <span>Что ищем?</span>
-            </div>
+            </div> -->
             <?php
                 if($isAdmin==true):
                     ?><div class="user-bar">
@@ -58,10 +58,10 @@
                         $artistq=mysqli_query($connection,"SELECT * from artist JOIN albumartist ON albumartist.ArtistID=artist.ArtistID WHERE albumartist.AlbumID=$album->AlbumID");
                         $artistObj=mysqli_fetch_object($artistq);
 
-                        $albImgq=mysqli_query($connection,"SELECT ImgPath FROM AlbumImage WHERE AlbumID=$news->AlbumID");
+                        $albImgq=mysqli_query($connection,"SELECT ImgPath FROM albumimage WHERE AlbumID=$news->AlbumID");
                         $albImgObj=mysqli_fetch_object($albImgq);
 
-                        $artImgq=mysqli_query($connection,"SELECT ImgPath FROM ArtistImage WHERE ArtistID=$artistObj->ArtistID AND IsMain IS TRUE");
+                        $artImgq=mysqli_query($connection,"SELECT ImgPath FROM artistimage WHERE ArtistID=$artistObj->ArtistID AND IsMain IS TRUE");
                         $artImgObj=mysqli_fetch_object($artImgq);
                         ?>
                         <div class="medium-card">
@@ -102,7 +102,7 @@
                                 <Label>Выберите альбом:</Label>
                                 <select name="album" id="album">
                                     <?php
-                                        $albumsq=mysqli_query($connection,"SELECT * FROM Album");
+                                        $albumsq=mysqli_query($connection,"SELECT * FROM album");
                                         while($albumSelected=mysqli_fetch_object($albumsq)):?>
                                             <option value="<?php echo $albumSelected->AlbumID?>">
                                                 <?php echo $albumSelected->Title?>
@@ -123,7 +123,7 @@
                 <?php
                     $lastAlbumsq=mysqli_query($connection,"SELECT AlbumID,Title FROM album ORDER BY AlbumID DESC LIMIT 8");
                     while($lastAlbum=mysqli_fetch_object($lastAlbumsq)):
-                        $lastAlbImgq=mysqli_query($connection,"SELECT ImgPath FROM AlbumImage WHERE AlbumID=$lastAlbum->AlbumID");
+                        $lastAlbImgq=mysqli_query($connection,"SELECT ImgPath FROM albumimage WHERE AlbumID=$lastAlbum->AlbumID");
                         $lastAlbImgObj=mysqli_fetch_object($lastAlbImgq);
                         ?>
                         <div class="little-card">
@@ -139,21 +139,21 @@
         if(isset($_POST["save-card"])):
             $info=$_POST["edit-text"];
             $id=intval($_POST["formname"]);
-            $updateq=mysqli_query($connection,"UPDATE News SET Info='$info' WHERE NewsID=$id");
+            $updateq=mysqli_query($connection,"UPDATE news SET Info='$info' WHERE NewsID=$id");
             echo "<meta http-equiv='refresh' content='0'>";
         elseif(isset($_POST["delete-card"])):
             $info=$_POST["edit-text"];
             $id=intval($_POST["formname"]);
-            $deleteq=mysqli_query($connection,"DELETE FROM News WHERE NewsID=$id");
+            $deleteq=mysqli_query($connection,"DELETE FROM news WHERE NewsID=$id");
             echo "<meta http-equiv='refresh' content='0'>";
         endif;
         if(isset($_POST["add-news"])):
             $albumid=$_POST["album"];
             $text=$_POST["news-text-add"];
-            $priorityq=mysqli_query($connection,"SELECT MAX(PRIORITY) as value FROM News");
+            $priorityq=mysqli_query($connection,"SELECT MAX(PRIORITY) as value FROM news");
             $priorityObj=mysqli_fetch_object($priorityq);
             $maxPriority=$priorityObj->value;
-            $addnewsq=mysqli_query($connection,"INSERT INTO News(AlbumID, Info, Priority) VALUES($albumid,'$text',$maxPriority)");
+            $addnewsq=mysqli_query($connection,"INSERT INTO news(AlbumID, Info, Priority) VALUES($albumid,'$text',$maxPriority)");
             echo "<meta http-equiv='refresh' content='0'>";
         endif;
         mysqli_close($connection);?>

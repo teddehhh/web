@@ -12,10 +12,10 @@
     <main>
         <section class="title-section">
             <h1>Музыканты</h1>
-            <div class="search">
+            <!-- <div class="search">
                 <img src="/images/search-icon.png" alt="">
                 <span>Что ищем?</span>
-            </div>
+            </div> -->
         </section>
         <section class="artists">
             <div class="artist-card">

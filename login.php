@@ -39,7 +39,7 @@
                 $username=$_POST['username'];
                 $password=$_POST['password'];
 
-                $dataq=mysqli_query($connection,"SELECT Hash, Salt FROM Users WHERE Username='$username'");
+                $dataq=mysqli_query($connection,"SELECT Hash, Salt FROM users WHERE Username='$username'");
                 $dataObj=mysqli_fetch_object($dataq);
 
                 if($dataObj==null):
@@ -72,7 +72,7 @@
                 $salted_password=$salt.$password;
                 $hash=password_hash($salted_password,PASSWORD_DEFAULT);
                 
-                if ($connection->query("INSERT INTO Users(username,salt,hash) VALUES('$username','$salt','$hash')")===TRUE):
+                if ($connection->query("INSERT INTO users(username,salt,hash) VALUES('$username','$salt','$hash')")===TRUE):
                 ?>  <span class="success-msg"><?php echo "Новый пользователь зарегистрирован";?></span>
                 <?php
                 else:
