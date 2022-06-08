@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Альбомы</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <?php include 'header.php';?>
+    <?php include 'modules/db-connection.php' ?>
+    <?php include 'modules/header.php'; ?>
     <main>
         <section class="title-section">
             <h1>Последние релизы</h1>
@@ -16,74 +19,19 @@
                 <img src="/images/search-icon.png" alt="">
                 <span>Что ищем?</span>
             </div> -->
+            <?php include 'modules/logout.php'; ?>
         </section>
         <section class="albums">
-            <div class="little-card">
-                <img src="/images/albums/frtwte.jpg" alt="">
-                <p>For Those That Wish to Exist</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/LMTFNoEternityInGold.jpg" alt="">
-                <p>No Eternity in Gold</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/mcin5.jpg" alt="">
-                <p>Monstercat Instinct Vol.5</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/that'sspirit.jpg" alt="">
-                <p>That's Spirit</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/noise.jpg" alt="">
-                <p>N / O / I / S / E</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/hosh.jpg" alt="">
-                <p>Хошхоног</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/wind.jpg" alt="">
-                <p>Круг Ветров</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/wild-youth.jpg" alt="">
-                <p>Wild Youth</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/frtwte.jpg" alt="">
-                <p>For Those That Wish to Exist</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/LMTFNoEternityInGold.jpg" alt="">
-                <p>No Eternity in Gold</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/mcin5.jpg" alt="">
-                <p>Monstercat Instinct Vol.5</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/that'sspirit.jpg" alt="">
-                <p>That's Spirit</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/noise.jpg" alt="">
-                <p>N / O / I / S / E</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/hosh.jpg" alt="">
-                <p>Хошхоног</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/wind.jpg" alt="">
-                <p>Круг Ветров</p>
-            </div>
-            <div class="little-card">
-                <img src="/images/albums/wild-youth.jpg" alt="">
-                <p>Wild Youth</p>
-            </div>
+            <?php
+            $albums = mysqli_query($connection, "SELECT album.AlbumID, Title, ImgPath FROM album JOIN albumimage ON albumimage.AlbumID=album.AlbumID");
+            while ($album = mysqli_fetch_object($albums)) : ?>
+                <a class="little-card" href="album.php?albumid=<?php echo $album->AlbumID ?>">
+                    <img src="<?php echo $album->ImgPath; ?>" alt="">
+                    <p><?php echo $album->Title; ?></p>
+                </a>
+            <?php endwhile; ?>
         </section>
-        <section class="pages-bar">
+        <!-- <section class="pages-bar">
             <a href="#" class="page">1</a>
             <a href="#" class="page">2</a>
             <a href="#" class="page">3</a>
@@ -92,8 +40,9 @@
             <a href="#" class="page">6</a>
             <a href="#" class="page">7</a>
             <a href="#" class="page">8</a>
-        </section>
+        </section> -->
     </main>
-    <?php include 'footer.php';?>
+    <?php include 'modules/footer.php'; ?>
 </body>
+
 </html>
