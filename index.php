@@ -52,7 +52,7 @@
                         if ($isAdmin) : ?>
                             <form action="" method="POST">
                                 <input type="hidden" name="formname" value="<?php echo $news->NewsID ?>">
-                                <textarea class="edit-field" name="edit-text"><?php echo $news->Info ?></textarea>
+                                <textarea class="edit-area" name="edit-text"><?php echo $news->Info ?></textarea>
                                 <div class="news-control">
                                     <button class="save-btn" type="submit" name="save-card">
                                         <img src="/images/save.png" alt="">
@@ -72,20 +72,27 @@
                 endwhile;
                 if ($isAdmin) : ?>
                     <div class="medium-card">
+                        <span class="add-form-title">Добавление новости</span>
                         <form class="add-form" action="" method="POST" name="add-news">
-                            <Label>Выберите альбом:</Label>
-                            <select name="album" id="album">
-                                <?php
-                                $albumsq = mysqli_query($connection, "SELECT * FROM album");
-                                while ($albumSelected = mysqli_fetch_object($albumsq)) : ?>
-                                    <option value="<?php echo $albumSelected->AlbumID ?>">
-                                        <?php echo $albumSelected->Title ?>
-                                    </option>
-                                <?php endwhile; ?>
-                            </select>
-                            <Label>Введите текст новости:</Label>
-                            <textarea class="news-text-add" name="news-text-add" id="news-text"></textarea>
-                            <input name="add-news" type="submit" value="Добавить">
+                            <div class="add-field">
+                                <Label>Выберите альбом:</Label>
+                                <select name="album" id="album">
+                                    <?php
+                                    $albumsq = mysqli_query($connection, "SELECT * FROM album");
+                                    while ($albumSelected = mysqli_fetch_object($albumsq)) : ?>
+                                        <option value="<?php echo $albumSelected->AlbumID ?>">
+                                            <?php echo $albumSelected->Title ?>
+                                        </option>
+                                    <?php endwhile; ?>
+                                </select>
+                            </div>
+                            <div class="add-field">
+                                <Label>Введите текст новости:</Label>
+                                <textarea class="edit-area" name="news-text-add" id="news-text"></textarea>
+                            </div>
+                            <div class="add-field">
+                                <input name="add-news" type="submit" value="Добавить">
+                            </div>
                         </form>
                     </div>
                 <?php endif; ?>
@@ -95,14 +102,14 @@
             <h2>Из последнего:</h2>
             <div class="ln-cards">
                 <?php
-                $lastAlbumsq = mysqli_query($connection, "SELECT AlbumID,Title FROM album ORDER BY AlbumID DESC LIMIT 8");
+                $lastAlbumsq = mysqli_query($connection, "SELECT AlbumID,Title FROM album ORDER BY ReleaseDate DESC LIMIT 8");
                 while ($lastAlbum = mysqli_fetch_object($lastAlbumsq)) :
                     $lastAlbImgq = mysqli_query($connection, "SELECT ImgPath FROM albumimage WHERE AlbumID=$lastAlbum->AlbumID");
                     $lastAlbImgObj = mysqli_fetch_object($lastAlbImgq); ?>
-                    <div class="little-card">
+                    <a class="little-card" href="album.php?albumid=<?php echo $lastAlbum->AlbumID;?>">
                         <img src="<?php echo $lastAlbImgObj->ImgPath ?>" alt="">
                         <p><?php echo $lastAlbum->Title ?></p>
-                    </div>
+                    </a>
                 <?php endwhile; ?>
             </div>
         </section>
@@ -123,7 +130,7 @@
     if (isset($_POST["add-news"])) :
         $albumid = $_POST["album"];
         $text = $_POST["news-text-add"];
-        $priorityq = mysqli_query($connection, "SELECT MAX(PRIORITY) as value FROM news");
+        $priorityq = mysqli_query($connection, "SELECT IFNULL((SELECT MAX(PRIORITY) FROM news), 1) as value");
         $priorityObj = mysqli_fetch_object($priorityq);
         $maxPriority = $priorityObj->value;
         $addnewsq = mysqli_query($connection, "INSERT INTO news(AlbumID, Info, Priority) VALUES($albumid,'$text',$maxPriority)");
