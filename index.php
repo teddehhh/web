@@ -54,10 +54,10 @@
                                 <input type="hidden" name="formname" value="<?php echo $news->NewsID ?>">
                                 <textarea class="edit-area" name="edit-text"><?php echo $news->Info ?></textarea>
                                 <div class="news-control">
-                                    <button class="save-btn" type="submit" name="save-card">
+                                    <button type="submit" name="save-card">
                                         <img src="/images/save.png" alt="">
                                     </button>
-                                    <button class="delete-btn" type="submit" name="delete-card">
+                                    <button type="submit" name="delete-card">
                                         <img src="/images/delete.png" alt="">
                                     </button>
                                 </div>
@@ -106,7 +106,7 @@
                 while ($lastAlbum = mysqli_fetch_object($lastAlbumsq)) :
                     $lastAlbImgq = mysqli_query($connection, "SELECT ImgPath FROM albumimage WHERE AlbumID=$lastAlbum->AlbumID");
                     $lastAlbImgObj = mysqli_fetch_object($lastAlbImgq); ?>
-                    <a class="little-card" href="album.php?albumid=<?php echo $lastAlbum->AlbumID;?>">
+                    <a class="little-card" href="album.php?albumid=<?php echo $lastAlbum->AlbumID; ?>">
                         <img src="<?php echo $lastAlbImgObj->ImgPath ?>" alt="">
                         <p><?php echo $lastAlbum->Title ?></p>
                     </a>

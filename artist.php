@@ -33,7 +33,7 @@
                     <?php
                     $albumsq = mysqli_query($connection, "SELECT album.AlbumID, Title, ImgPath FROM albumartist JOIN album ON albumartist.AlbumID=album.albumID JOIN albumimage on albumimage.AlbumID=album.AlbumID WHERE albumartist.ArtistID=$artistid");
                     while ($album = mysqli_fetch_object($albumsq)) : ?>
-                        <a class="little-card" href="album.php?albumid=<?php echo $album->AlbumID?>"?>
+                        <a class="little-card" href="album.php?albumid=<?php echo $album->AlbumID ?>" ?>
                             <img src="<?php echo $album->ImgPath ?>" alt="">
                             <p><?php echo $album->Title ?></p>
                         </a>
@@ -49,7 +49,7 @@
                     <?php
                     $artimages = mysqli_query($connection, "SELECT ImgPath FROM artistimage WHERE ArtistID=$artistid AND IsMain=FALSE");
                     while ($img = mysqli_fetch_object($artimages)) : ?>
-                        <li id=second-img><img src="<?php echo $img->ImgPath ?>" alt=""></li>
+                        <li class="second-img"><img src="<?php echo $img->ImgPath ?>" alt=""></li>
                     <?php endwhile; ?>
                 </ul>
                 <?php if ($isAdmin) : ?>
@@ -89,7 +89,7 @@
                         </tr>
                     </table>
                     <?php if ($isAdmin) : ?>
-                        <button class="save-btn" name="save" type="submit">Сохранить</button>
+                        <button class="save-btn-info" name="save" type="submit">Сохранить</button>
                     </form>
                 <?php endif; ?>
             </section>

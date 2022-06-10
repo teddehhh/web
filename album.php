@@ -77,32 +77,53 @@
                     </div>
                     <img src="/images/arrow.png" alt="">
                 </a>
-                <table class="ai-table">
-                    <caption>Информация об альбоме</caption>
-                    <tr>
-                        <th>Дата выхода:</th>
-                        <td><?php echo $album->ReleaseDate; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Жанр:</th>
-                        <td><?php echo $album->Genre; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Студия:</th>
-                        <td><?php echo $album->Studio; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Продолжительность:</th>
-                        <?php
-                        $timeq = mysqli_query($connection, "SELECT SUM(Length) as GeneralLen FROM track WHERE AlbumID=$albumid");
-                        $time = mysqli_fetch_object($timeq); ?>
-                        <td><?php echo get_time($time->GeneralLen); ?></td>
-                    </tr>
-                </table>
+                <?php if ($isAdmin) : ?>
+                    <form action="" method="POST">
+                    <?php endif; ?>
+                    <table class="ai-table">
+                        <caption>Информация об альбоме</caption>
+                        <tr>
+                            <th>Дата выхода:</th>
+                            <td><?php
+                                if ($isAdmin) : ?>
+                                    <input type="date" name="releasedate" value="<?php echo $album->ReleaseDate ?>">
+                                <?php
+                                else :
+                                    echo $album->ReleaseDate; ?>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Жанр:</th>
+                            <td><?php echo $album->Genre; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Студия:</th>
+                            <td><?php echo $album->Studio; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Продолжительность:</th>
+                            <?php
+                            $timeq = mysqli_query($connection, "SELECT SUM(Length) as GeneralLen FROM track WHERE AlbumID=$albumid");
+                            $time = mysqli_fetch_object($timeq); ?>
+                            <td><?php echo get_time($time->GeneralLen); ?></td>
+                        </tr>
+                    </table>
+                    <?php if ($isAdmin) : ?>
+                        <button class="save-btn-info" name="save" type="submit">Сохранить</button>
+                    </form>
+                <?php endif; ?>
             </section>
         </section>
     </main>
     <?php include 'modules/footer.php'; ?>
+    <?php if (isset($_POST["save"])) :
+        $releasedate = $_POST["releasedate"];
+        $albumid = $_GET["albumid"];
+        $updateq = mysqli_query($connection, "UPDATE album SET ReleaseDate='$releasedate' WHERE AlbumID=$albumid");
+        echo "<meta http-equiv='refresh' content='0'>";
+    endif;
+    mysqli_close($connection); ?>
 </body>
 
 </html>
