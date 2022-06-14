@@ -1,0 +1,25 @@
+<?php
+define('SERVER', 'localhost');
+define('USERNAME', 'root');
+define('PASSWORD', 'pass4422');
+define('DATABASE', 'survey');
+define('UNKNOWN_USER', 1);
+define('WRONG_USER_OR_PASS', 2);
+define('SESSION_LOGEDID', 'LOGEDIN');
+define('SESSION_ERROR', 'ERROR_CODE');
+define('SESSION_USERID', 'USERID');
+define('SESSTION_ROLEID', 'ROLEID');
+define('RL_HR', 1);
+define('RL_MANAGER', 2);
+define('RL_EMPLOYEE', 3);
+define('ANSWER_SINGLE', 1);
+define('ANSWER_MULTIPLE', 2);
+define('ANSWER_IMG', 3);
+define('ANSWER_VIDEO', 4);
+define('ANSWER_TEXT', 5);
+define('INFO_TEXT', 1);
+define('INFO_IMG', 2);
+define('INFO_VIDEO', 3);
+define('INFO_EMOJI', 4);
+define('DATE_TIME_IS_RECORDED', 'DATE_TIME_IS_RECORDED');
+define('DATE_TIME_START', 'DATE_TIME_START');
