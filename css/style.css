@@ -508,6 +508,7 @@ footer {
 .tl-table {
   border-collapse: separate;
   border-spacing: 0px 10px;
+  padding: 0px 10px;
 }
 
 .ai-table {
@@ -516,10 +517,6 @@ footer {
 
 .tr-len {
   text-align: right;
-}
-
-.tl-table table {
-  border-spacing: 0px 20px;
 }
 
 .tl-table td {
@@ -534,10 +531,6 @@ footer {
 .tr-num,
 .tr-len {
   padding: 0 10px;
-}
-
-.tl-table {
-  padding: 0px 10px;
 }
 
 #th-num {
