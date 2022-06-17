@@ -78,6 +78,12 @@ nav .navlink:nth-last-child(1) {
   padding: 3px;
 }
 
+.welcome-message {
+  padding-bottom: 20px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
 .surveys-section {
   display: flex;
   flex-direction: row;
@@ -86,13 +92,39 @@ nav .navlink:nth-last-child(1) {
   padding-bottom: 50px;
 }
 
-.survey-card {
-  position: relative;
+.survey-card-control {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
   flex-basis: 210px;
   max-width: 300px;
-  height: 150px;
   margin: 1%;
+  height: 170px;
+  border-radius: 13px;
+  border: 3px #293240 solid;
+}
+
+.survey-control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.survey-control input {
+  font-family: "Montserrat", sans-serif;
+  border: 0px;
+  padding: 5px 10px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #293240;
+  color: white;
+  margin: 5px 10px;
+}
+
+.survey-card {
+  position: relative;
+  flex-grow: 1;
   border-radius: 10px;
   background-color: red;
   color: white;
@@ -231,7 +263,7 @@ nav .navlink:nth-last-child(1) {
 
 .stat-card img {
   width: 50%;
-  max-width: 150px;
+  max-width: 100px;
 }
 
 .stat-value,
@@ -495,6 +527,56 @@ nav .navlink:nth-last-child(1) {
   background-color: #ff0000;
 }
 
+/* results.php */
+
+.results-container table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px 10px;
+}
+
+.results-container tr:nth-child(1) {
+  background-color: inherit;
+  color: #292929;
+}
+
+.results-container tr {
+  line-height: 35px;
+  background-color: #293240;
+  color: white;
+}
+
+.tb-title,
+.tb-timeend {
+  padding: 0 10px;
+}
+
+.tb-title {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.tb-timeend {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.results-container th,
+.results-container td {
+  text-align: center;
+}
+
+.results-container td input{
+  font-family: "Montserrat", sans-serif;
+  border: 0px;
+  padding: 5px 10px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #ff4346;
+  color: white;
+  margin: 5px 10px;
+}
+
 /* media-queries */
 
 /* index.php */
@@ -512,5 +594,8 @@ nav .navlink:nth-last-child(1) {
   }
   .navlink {
     margin: 5px 5px;
+  }
+  .surveys-section {
+    justify-content: center;
   }
 }

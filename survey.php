@@ -1,4 +1,6 @@
-<?php include 'modules/survey/survey-content.php' ?>
+<?php include 'modules/survey/survey-start.php' ?>
+<?php include 'modules/survey/survey-getdata.php' ?>
+<?php include 'modules/survey/survey-processing.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,13 +19,13 @@
             <?php include 'modules/survey/survey-header.php'; ?>
         </div>
         <form action="" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="datetimestart" value="<?php echo $datetimestart; ?>" />
             <?php include 'modules/survey/questions-generate.php'; ?>
             <div class="buttons-card">
-                <!-- <input type="submit" name="cancel" id="cancel" value="Отмена"> -->
-                <input type="submit" name="confirm" id="confirm" value="Завершить">
+                <input type="submit" name="cancel" value="Отмена">
+                <input type="submit" name="confirm" value="Завершить">
             </div>
         </form>
-        <?php include 'modules/survey/survey-processing.php'; ?>
     </main>
     <?php include "modules/general/footer.php" ?>
 </body>

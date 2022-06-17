@@ -102,16 +102,7 @@ function generate_question($typequestionid, $answertypeid, $qtext, $qmedia, $res
     return;
 };
 
-$questions_count = 0;
-$questions_info = array();
-
-while ($row = $res_questions->fetch_assoc()) :
-    $questions_count++;
-    $stm_answers = $connection->prepare('SELECT answerid, infotypeid, text, mediapath FROM answer WHERE questionid=?');
-    $stm_answers->bind_param("i", $row['questionid']);
-    $stm_answers->execute();
-    $res_answers = $stm_answers->get_result();
-    generate_question($row['infotypeid'], $row['answertypeid'], $row['text'], $row['mediapath'], $res_answers, $questions_count);
-    $stm_answers->free_result();
-    array_push($questions_info, [$row['questionid'], $row['answertypeid']]);
-endwhile;
+// generating questions
+foreach ($questions_data as $question) :
+    generate_question($question[1], $question[2], $question[3], $question[4], $question[5], $question[6]);
+endforeach;

@@ -1,4 +1,4 @@
-<?php include 'modules/user/user_info.php'; ?>
+<?php include 'modules/user/user-start.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,41 +15,14 @@
     <main>
         <div class="user-container">
             <span class="container-title">Персональная информация</span>
-            <?php include 'modules/user/info_card.php'; ?>
+            <?php include 'modules/user/user-info-generate.php'; ?>
         </div>
         <div class="stat-container">
             <span class="container-title">Статистика</span>
-            <?php include 'modules/user/stat-cards.php'; ?>
             <?php include 'modules/user/stats-generate.php'; ?>
         </div>
         <div class="history-container">
-            <span class="container-title">История</span>
-            <table>
-                <tr>
-                    <th>Дата</th>
-                    <th>Название</th>
-                    <th>Кол-во вопросов</th>
-                    <th>Время</th>
-                </tr>
-                <tr class="row">
-                    <td class="date-col">14.02.21</td>
-                    <td>Удовлетворенность моральных потребностей</td>
-                    <td>5</td>
-                    <td class="time-col">5:20</td>
-                </tr>
-                <tr class="row">
-                    <td class="date-col">14.02.21</td>
-                    <td>Удовлетворенность моральных потребностей</td>
-                    <td>5</td>
-                    <td class="time-col">5:20</td>
-                </tr>
-                <tr class="row">
-                    <td class="date-col">14.02.21</td>
-                    <td>Удовлетворенность моральных потребностей</td>
-                    <td>5</td>
-                    <td class="time-col">5:20</td>
-                </tr>
-            </table>
+            <?php include 'modules/user/history-generate.php'; ?>
         </div>
     </main>
     <?php include 'modules/general/footer.php' ?>

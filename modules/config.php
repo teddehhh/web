@@ -9,6 +9,7 @@ define('SESSION_LOGEDID', 'LOGEDIN');
 define('SESSION_ERROR', 'ERROR_CODE');
 define('SESSION_USERID', 'USERID');
 define('SESSTION_ROLEID', 'ROLEID');
+define('SESSION_SUBDIVID', 'SUBDIVID');
 define('RL_HR', 1);
 define('RL_MANAGER', 2);
 define('RL_EMPLOYEE', 3);
