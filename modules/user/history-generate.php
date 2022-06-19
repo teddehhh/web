@@ -1,9 +1,7 @@
-<span class="container-title">История</span>
 <table>
     <tr>
         <th>Дата</th>
         <th>Название</th>
-        <th>Кол-во вопросов</th>
         <th>Время</th>
     </tr>
     <?php
@@ -12,8 +10,13 @@
         $sec = $time % 60; ?>
         <tr class="row">
             <td class="date-col"><?php echo $date; ?></td>
-            <td><?php echo $title; ?></td>
-            <td><?php echo $question_count; ?></td>
+            <td>
+                <form method="POST" action="survey.php?surveyid=<?php echo $surveyid; ?>">
+                    <input type="hidden" name="<?php echo RESULTS_MODE; ?>" value="<?php echo MY_RES; ?>">
+                    <input class="history-btn-survey" type="submit" value="<?php echo $title; ?>">
+                </form>
+
+            </td>
             <td class="time-col"><?php echo "{$min}:{$sec}"; ?></td>
         </tr>
     <?php

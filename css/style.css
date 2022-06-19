@@ -14,6 +14,7 @@ body {
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 ul {
@@ -45,7 +46,7 @@ main {
   margin: 0 10%;
 }
 
-/* surveys-page.php */
+/* index.php */
 
 /* header */
 .logo img {
@@ -73,6 +74,22 @@ nav .navlink:nth-last-child(1) {
   margin-right: 0;
 }
 
+button.navlink {
+  width: 30px;
+  height: 30px;
+  border: 0px;
+  border-radius: 5px;
+  background-color: #929292;
+}
+
+button.navlink:hover,
+.container-header button:hover,
+.survey-control button:hover,
+.add-survey-btn:hover,
+.buttons-card input:hover {
+  cursor: pointer;
+}
+
 .navlink img {
   width: 20px;
   padding: 3px;
@@ -80,8 +97,26 @@ nav .navlink:nth-last-child(1) {
 
 .welcome-message {
   padding-bottom: 20px;
-  font-size: 20px;
+  font-size: 26px;
   font-weight: 500;
+}
+
+.add-survey-btn {
+  width: 170px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #293240;
+  color: white;
+  border-radius: 5px;
+  border: 0px;
+}
+
+.add-survey-btn img {
+  width: 30px;
+  margin: 0 10px;
 }
 
 .surveys-section {
@@ -111,15 +146,9 @@ nav .navlink:nth-last-child(1) {
   justify-content: center;
 }
 
-.survey-control input {
-  font-family: "Montserrat", sans-serif;
-  border: 0px;
-  padding: 5px 10px;
-  font-weight: bold;
-  border-radius: 5px;
-  background-color: #293240;
-  color: white;
-  margin: 5px 10px;
+.survey-control form {
+  display: flex;
+  flex-direction: row;
 }
 
 .survey-card {
@@ -179,6 +208,36 @@ nav .navlink:nth-last-child(1) {
   transition: visibility 0.3s linear, opacity 0.3s linear;
 }
 
+.survey-date {
+  text-align: center;
+  padding: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.survey-timeend {
+  padding: 10px;
+  background-color: #293240;
+  border-radius: 10px;
+}
+
+.survey-cmd {
+  width: 25px;
+  height: 25px;
+  box-sizing: content-box;
+}
+
+.survey-control button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  margin: 5px;
+  background-color: #293240;
+  border: 0px;
+  border-radius: 5px;
+}
+
 /* user.php */
 .user-container,
 .stat-container,
@@ -189,7 +248,6 @@ nav .navlink:nth-last-child(1) {
 }
 
 .container-title {
-  padding-bottom: 10px;
   font-size: 20px;
 }
 
@@ -237,6 +295,26 @@ nav .navlink:nth-last-child(1) {
   border-radius: 5px;
   background-color: #d9d9d9;
   color: #293240;
+}
+
+.container-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.container-header button {
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
+  border: 0px;
+  border-radius: 5px;
+  background-color: #929292;
+}
+
+.download-stats {
+  width: 30px;
 }
 
 .stat-cards {
@@ -303,6 +381,20 @@ nav .navlink:nth-last-child(1) {
 
 .history-container table th {
   border-bottom: 3px solid white;
+}
+
+.history-btn-survey {
+  border: 0px;
+  padding: 10px;
+  font-family: "Montserrat", sans-serif;
+  background-color: #293240;
+  color: white;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.history-btn-survey:hover {
+  cursor: pointer;
 }
 
 .date-col,
@@ -452,7 +544,10 @@ nav .navlink:nth-last-child(1) {
 }
 
 .question-container {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  word-wrap: break-word;
   margin-left: 10px;
 }
 
@@ -505,6 +600,7 @@ nav .navlink:nth-last-child(1) {
   flex-direction: row;
   flex-wrap: wrap;
   padding: 10px 20px;
+  margin-top: 20px;
   border-radius: 10px;
   background-color: #293240;
 }
@@ -527,6 +623,14 @@ nav .navlink:nth-last-child(1) {
   background-color: #ff0000;
 }
 
+.percent {
+  margin-left: 20px;
+  font-weight: bold;
+  padding: 5px;
+  background-color: #ff4346;
+  border-radius: 10px;
+}
+
 /* results.php */
 
 .results-container table {
@@ -544,6 +648,7 @@ nav .navlink:nth-last-child(1) {
   line-height: 35px;
   background-color: #293240;
   color: white;
+  padding: 10px;
 }
 
 .tb-title,
@@ -551,14 +656,8 @@ nav .navlink:nth-last-child(1) {
   padding: 0 10px;
 }
 
-.tb-title {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-
-.tb-timeend {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+.tb-status {
+  padding: 10px;
 }
 
 .results-container th,
@@ -566,7 +665,7 @@ nav .navlink:nth-last-child(1) {
   text-align: center;
 }
 
-.results-container td input{
+.results-container td input {
   font-family: "Montserrat", sans-serif;
   border: 0px;
   padding: 5px 10px;
@@ -575,6 +674,58 @@ nav .navlink:nth-last-child(1) {
   background-color: #ff4346;
   color: white;
   margin: 5px 10px;
+}
+
+.survey-status {
+  width: 30px;
+}
+
+/* add-survey.php */
+.add-survey-title {
+  background-color: #ff4346;
+  border: 0px;
+  border-bottom: 3px white solid;
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.add-survey-desc {
+  background-color: #ff4346;
+  border: 0px;
+  border-bottom: 2px white solid;
+  font-size: 18px;
+  color: white;
+}
+
+.survey-info input,
+.add-survey-date-container {
+  margin-bottom: 20px;
+}
+
+.survey-info input:nth-last-child(1) {
+  margin-bottom: 0;
+}
+
+.add-survey-date-container {
+  display: flex;
+  align-items: center;
+  background-color: #293240;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.add-survey-datetime {
+  border-radius: 5px;
+  padding: 4px;
+  text-align: center;
+  border: 0px;
+}
+
+.add-survey-title:focus,
+.add-survey-desc:focus {
+  outline: none;
 }
 
 /* media-queries */
@@ -595,6 +746,13 @@ nav .navlink:nth-last-child(1) {
   .navlink {
     margin: 5px 5px;
   }
+  .add-survey-container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 592px) {
   .surveys-section {
     justify-content: center;
   }

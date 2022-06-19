@@ -19,7 +19,7 @@ if (isset($_POST['signin'])) :
     else :
         if (password_verify($salt . $password, $hash)) :
             $_SESSION[SESSION_USERID] = $userid;
-            $_SESSION[SESSTION_ROLEID] = $roleid;
+            $_SESSION[SESSION_ROLEID] = $roleid;
             $_SESSION[SESSION_LOGEDID] = TRUE;
             header('Location: index.php');
         else :

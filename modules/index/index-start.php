@@ -24,13 +24,11 @@ foreach ($times as $time) :
     endif;
 endforeach;
 
-if ($_SESSION[SESSTION_ROLEID] == RL_HR) :
-    $res = $connection->query('SELECT surveyid, title, description from survey WHERE surveyid AND IsArchived!=TRUE');
+if ($_SESSION[SESSION_ROLEID] == RL_HR) :
+    $res = $connection->query('SELECT surveyid, title, description, timeend from survey WHERE IsArchived=FALSE');
 else :
-    $stm = $connection->prepare('SELECT surveyid, title, description from survey WHERE surveyid NOT IN (SELECT surveyid from user_survey WHERE userid=?) AND isarchived=FALSE');
+    $stm = $connection->prepare('SELECT surveyid, title, description, timeend from survey WHERE surveyid NOT IN (SELECT surveyid from user_survey WHERE userid=?) AND isarchived=FALSE');
     $stm->bind_param("i", $_SESSION[SESSION_USERID]);
     $stm->execute();
     $res = $stm->get_result();
-    $stm->free_result();
 endif;
-mysqli_close($connection);

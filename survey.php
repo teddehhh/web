@@ -21,10 +21,6 @@
         <form action="" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="datetimestart" value="<?php echo $datetimestart; ?>" />
             <?php include 'modules/survey/questions-generate.php'; ?>
-            <div class="buttons-card">
-                <input type="submit" name="cancel" value="Отмена">
-                <input type="submit" name="confirm" value="Завершить">
-            </div>
         </form>
     </main>
     <?php include "modules/general/footer.php" ?>

@@ -1,9 +1,9 @@
 <?php
 // getting general data of survey
-$stm = $connection->prepare('SELECT title, description FROM survey WHERE surveyid=?');
+$stm = $connection->prepare('SELECT title, description, timeend FROM survey WHERE surveyid=?');
 $stm->bind_param("i", $_GET['surveyid']);
 $stm->execute();
-$stm->bind_result($title, $description);
+$stm->bind_result($title, $description, $timeend);
 $stm->fetch();
 $stm->free_result();
 
@@ -20,7 +20,7 @@ $questions_data = array();
 // writing questions
 while ($row = $res_questions->fetch_assoc()) :
     $questions_count++;
-    $stm = $connection->prepare('SELECT answerid, infotypeid, text, mediapath FROM answer WHERE questionid=?');
+    $stm = $connection->prepare('SELECT answerid, infotypeid, text, mediapath FROM answer WHERE questionid=? ORDER BY answerid');
     $stm->bind_param("i", $row['questionid']);
     $stm->execute();
     $res_answers = $stm->get_result();

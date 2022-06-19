@@ -26,18 +26,40 @@
         $stm_emp_count->free_result(); ?>
         <tr>
             <td class="tb-title"><?php echo $row['title']; ?></td>
-            <td><?php echo $subdiv_count . '/' . $general_subdiv_count; ?></td>
+            <td class='tb-status'>
+                <?php
+                $path = '';
+                if ($subdiv_count == $general_subdiv_count) :
+                    $path = 'images/done-status.png';
+                elseif ($subdiv_count < $general_subdiv_count && $subdiv_count != 0) :
+                    $path = 'images/warning-status.png';
+                else :
+                    $path = 'images/bad-status.png';
+                endif;
+                ?>
+                <img class="survey-status" src="<?php echo $path; ?>" alt="" title="<?php echo "Прошло {$subdiv_count}/{$general_subdiv_count}"; ?>">
+            </td>
             <td>
                 <?php
-                if($subdiv_count > 0):?>
-                    <a href=""><input type="button" value="Подразделение"></a>
-
+                if ($subdiv_count == 0 && $general_count == 0) : ?>
+                    <span>----</span>
+                <?php
+                elseif ($subdiv_count > 0) :
+                ?>
+                    <form method="POST" action="survey.php?surveyid=<?php echo $row['surveyid']; ?>">
+                        <input type="hidden" name="<?php echo RESULTS_MODE; ?>" value="<?php echo RES_SUBDIV; ?>">
+                        <input class="history-btn-survey" type="submit" value="Подразделение">
+                    </form>
                 <?php
                 endif;
-                if($general_count > 0):?>
-                <a href=""><input type="button" value="Компания"></a>
+                if ($general_count > 0) : ?>
+                    <form method="POST" action="survey.php?surveyid=<?php echo $row['surveyid']; ?>">
+                        <input type="hidden" name="<?php echo RESULTS_MODE; ?>" value="<?php echo RES_COMP; ?>">
+                        <input class="history-btn-survey" type="submit" value="Компания">
+                    </form>
                 <?php
-                endif;?>
+                endif; ?>
+                </form>
             </td>
             <td class="tb-timeend"><?php echo $row['timeend']; ?></td>
         </tr>

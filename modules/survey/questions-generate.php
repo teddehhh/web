@@ -20,7 +20,7 @@ function generate_question_header($typequestionid, $text, $qmedia)
     return;
 };
 
-function generate_answer_content($answerid, $infotypeid, $text, $mediapath, $type, $count)
+function generate_answer_content($infotypeid, $text, $mediapath, $answers_count, $total_answers_count)
 { ?>
     <?php
     switch ($infotypeid):
@@ -42,22 +42,69 @@ function generate_answer_content($answerid, $infotypeid, $text, $mediapath, $typ
             break;
     endswitch; ?>
     <?php
+    if ($answers_count != 0 && $total_answers_count != 0) :
+        $value = $answers_count / $total_answers_count * 100; ?>
+        <label class="percent" for=""><?php echo floor($value * 100) / 100; ?>%</label>
+        <?php
+    endif;
     return;
 };
 
-function generate_question_content($answertypeid, $res_answers, $count)
+function generate_question_content($answertypeid, $res_answers, $count, $answers, $total_count_answers)
 {
     switch ($answertypeid):
-        case ANSWER_TEXT: ?>
-            <textarea class="input-text" name="<?php echo $count; ?>" placeholder="Введите текст" id="<?php echo $count; ?>" maxlength="255"></textarea>
-        <?php
+        case ANSWER_TEXT:
+            if ($answers != []) :
+                if ($total_count_answers != 0) :
+                    foreach ($answers as $text) : ?>
+                        <p class="answer-content-text"><?php echo $text; ?></p>
+                    <?php
+                    endforeach;
+                else : ?>
+                    <p class="answer-content-text"><?php echo $answers[0]; ?></p>
+                <?php
+                endif; ?>
+            <?php
+            else : ?>
+                <textarea class="input-text" name="<?php echo $count; ?>" placeholder="Введите текст" id="<?php echo $count; ?>" maxlength="255"></textarea>
+            <?php
+            endif; ?>
+            <?php
             break;
-        case ANSWER_VIDEO: ?>
-            <input class="input-file" type="file" accept="video/*" name="<?php echo $count; ?>" id="<?php echo $count; ?>">
-        <?php
+        case ANSWER_VIDEO:
+            if ($answers != []) :
+                if ($total_count_answers != 0) :
+                    foreach ($answers as $video) : ?>
+                        <video class="answer-content-media" src="test/video/<?php echo $video; ?>" controls="controls"></video>
+                    <?php
+                    endforeach;
+                else : ?>
+                    <video class="answer-content-media" src="test/video/<?php echo $answers[0]; ?>" controls="controls"></video>
+                <?php
+                endif; ?>
+            <?php
+            else : ?>
+                <input class="input-file" type="file" accept="video/*" name="<?php echo $count; ?>" id="<?php echo $count; ?>">
+            <?php
+            endif; ?>
+            <?php
             break;
-        case ANSWER_IMG: ?>
-            <input class="input-file" type="file" accept="image/*" name="<?php echo $count; ?>" id="<?php echo $count; ?>">
+        case ANSWER_IMG:
+            if ($answers != []) :
+                if ($total_count_answers != 0) :
+                    foreach ($answers as $img) : ?>
+                        <img class="answer-content-media" src="test/img/<?php echo $img; ?>" alt="">
+                    <?php
+                    endforeach;
+                else : ?>
+                    <img class="answer-content-media" src="test/img/<?php echo $answers[0]; ?>" alt="">
+                <?php
+                endif; ?>
+            <?php
+            else : ?>
+                <input class="input-file" type="file" accept="image/*" name="<?php echo $count; ?>" id="<?php echo $count; ?>">
+            <?php
+            endif; ?>
         <?php
             break;
         default:
@@ -65,11 +112,28 @@ function generate_question_content($answertypeid, $res_answers, $count)
             $name_post = $answertypeid == ANSWER_SINGLE ? '' : '[]'; ?>
             <ul>
                 <?php
-                while ($answer = $res_answers->fetch_assoc()) : ?>
+                $count_answer = 0;
+                while ($answer = $res_answers->fetch_assoc()) :
+                    $checked = '';
+                    $disabled = '';
+                    if ($total_count_answers != 0 && $answers != []) : ?>
+                        <li>
+                            <?php
+                            generate_answer_content($answer['infotypeid'], $answer['text'], $answer['mediapath'], $answers[$count_answer], $total_count_answers); ?>
+                        </li>
+                    <?php
+                        $count_answer++;
+                        continue;
+                    elseif ($answers != []) :
+                        if (in_array($answer['answerid'], $answers)) :
+                            $checked = 'checked';
+                        endif;
+                        $disabled = 'disabled';
+                    endif; ?>
                     <li>
-                        <input type="<?php echo $type; ?>" value="<?php echo $answer['answerid']; ?>" name="<?php echo $count . $name_post; ?>" id="<?php echo $count; ?>">
+                        <input <?php echo $checked; ?> <?php echo $disabled; ?> type="<?php echo $type; ?>" value="<?php echo $answer['answerid']; ?>" name="<?php echo $count . $name_post; ?>" id="<?php echo $count; ?>">
                         <?php
-                        generate_answer_content($answer['answerid'], $answer['infotypeid'], $answer['text'], $answer['mediapath'], $type, $count);
+                        generate_answer_content($answer['infotypeid'], $answer['text'], $answer['mediapath'], 0, 0);
                         ?>
                     </li>
                 <?php
@@ -82,7 +146,7 @@ function generate_question_content($answertypeid, $res_answers, $count)
     return;
 };
 
-function generate_question($typequestionid, $answertypeid, $qtext, $qmedia, $res_answers, $count)
+function generate_question($typequestionid, $answertypeid, $qtext, $qmedia, $res_answers, $count, $answers, $total_count_answers)
 { ?>
     <div class="question-card">
         <span class="question-card-num"><?php echo $count; ?></span>
@@ -93,7 +157,7 @@ function generate_question($typequestionid, $answertypeid, $qtext, $qmedia, $res
             </div>
             <div class="question-answers">
                 <?php
-                generate_question_content($answertypeid, $res_answers, $count);
+                generate_question_content($answertypeid, $res_answers, $count, $answers, $total_count_answers);
                 ?>
             </div>
         </div>
@@ -104,5 +168,156 @@ function generate_question($typequestionid, $answertypeid, $qtext, $qmedia, $res
 
 // generating questions
 foreach ($questions_data as $question) :
-    generate_question($question[1], $question[2], $question[3], $question[4], $question[5], $question[6]);
+    $answers = array();
+    $total_count_answers = 0;
+    if (isset($_POST[RESULTS_MODE])) :
+        switch ($_POST[RESULTS_MODE]):
+            case MY_RES:
+                $stm = $connection->prepare('SELECT answerid, text, mediapath FROM user_answer WHERE userid=? AND questionid=?');
+                $stm->execute([$_SESSION[SESSION_USERID], $question[0]]);
+                $res = $stm->get_result();
+                $stm->free_result();
+                while ($row = $res->fetch_assoc()) :
+                    switch ($question[2]):
+                        case ANSWER_TEXT:
+                            $value = $row['text'];
+                            break;
+                        case ANSWER_IMG:
+                            $value = $row['mediapath'];
+                            break;
+                        case ANSWER_VIDEO:
+                            $value = $row['mediapath'];
+                            break;
+                        default:
+                            $value = $row['answerid'];
+                            break;
+                    endswitch;
+                    array_push($answers, $value);
+                endwhile;
+                break;
+            case RES_SUBDIV:
+                switch ($question[2]):
+                    case ANSWER_TEXT:
+                        $stm = $connection->prepare('SELECT text FROM user_answer JOIN user_info ON user_info.UserID=user_answer.UserID WHERE user_info.SubdivisionID=? AND user_answer.QuestionID=? ORDER BY RAND() LIMIT 3');
+                        $stm->execute([$_SESSION[SESSION_SUBDIVID], $question[0]]);
+                        $res = $stm->get_result();
+                        $stm->free_result();
+                        while ($row = $res->fetch_assoc()) :
+                            array_push($answers, $row['text']);
+                        endwhile;
+                        $total_count_answers = 1;
+                        break;
+                    case ANSWER_IMG:
+                        $stm = $connection->prepare('SELECT mediapath FROM user_answer JOIN user_info ON user_info.UserID=user_answer.UserID WHERE user_info.SubdivisionID=? AND user_answer.QuestionID=? ORDER BY RAND() LIMIT 3');
+                        $stm->execute([$_SESSION[SESSION_SUBDIVID], $question[0]]);
+                        $res = $stm->get_result();
+                        $stm->free_result();
+                        while ($row = $res->fetch_assoc()) :
+                            array_push($answers, $row['mediapath']);
+                        endwhile;
+                        $total_count_answers = 1;
+                        break;
+                    case ANSWER_VIDEO:
+                        $stm = $connection->prepare('SELECT mediapath FROM user_answer JOIN user_info ON user_info.UserID=user_answer.UserID WHERE user_info.SubdivisionID=? AND user_answer.QuestionID=? ORDER BY RAND() LIMIT 3');
+                        $stm->execute([$_SESSION[SESSION_SUBDIVID], $question[0]]);
+                        $res = $stm->get_result();
+                        $stm->free_result();
+                        while ($row = $res->fetch_assoc()) :
+                            array_push($answers, $row['mediapath']);
+                        endwhile;
+                        $total_count_answers = 1;
+                        break;
+                    default:
+                        //general count of answers on survey
+                        $stm = $connection->prepare('SELECT COUNT(*) as count FROM user_answer JOIN user_info ON user_info.UserID=user_answer.UserID WHERE user_info.SubdivisionID=? AND user_answer.QuestionID=?');
+                        $stm->execute([$_SESSION[SESSION_SUBDIVID], $question[0]]);
+                        $res = $stm->get_result();
+                        $stm->free_result();
+                        $row = $res->fetch_assoc();
+                        $total_count_answers = $row['count'];
+
+                        $stm = $connection->prepare('SELECT answerid FROM answer WHERE QuestionID=?');
+                        $stm->execute([$question[0]]);
+                        $res = $stm->get_result();
+                        $stm->free_result();
+
+                        while ($row = $res->fetch_assoc()) :
+                            $stm = $connection->prepare('SELECT COUNT(*) as count FROM user_answer JOIN user_info ON user_info.userid=user_answer.userid WHERE user_info.SubdivisionID=? AND answerid=?');
+                            $stm->execute([$_SESSION[SESSION_SUBDIVID], $row['answerid']]);
+                            $res_ans_count = $stm->get_result();
+                            $stm->free_result();
+                            $row_ans_users = $res_ans_count->fetch_assoc();
+                            array_push($answers, $row_ans_users['count']);
+                        endwhile;
+                        break;
+                endswitch;
+                break;
+            case RES_COMP:
+                switch ($question[2]):
+                    case ANSWER_TEXT:
+                        $stm = $connection->prepare('SELECT text FROM user_answer JOIN user_info ON user_info.UserID=user_answer.UserID WHERE user_answer.QuestionID=? ORDER BY RAND() LIMIT 3');
+                        $stm->execute([$question[0]]);
+                        $res = $stm->get_result();
+                        $stm->free_result();
+                        while ($row = $res->fetch_assoc()) :
+                            array_push($answers, $row['text']);
+                        endwhile;
+                        $total_count_answers = 1;
+                        break;
+                    case ANSWER_IMG:
+                        $stm = $connection->prepare('SELECT mediapath FROM user_answer JOIN user_info ON user_info.UserID=user_answer.UserID WHERE user_answer.QuestionID=? ORDER BY RAND() LIMIT 3');
+                        $stm->execute([$question[0]]);
+                        $res = $stm->get_result();
+                        $stm->free_result();
+                        while ($row = $res->fetch_assoc()) :
+                            array_push($answers, $row['mediapath']);
+                        endwhile;
+                        $total_count_answers = 1;
+                        break;
+                    case ANSWER_VIDEO:
+                        $stm = $connection->prepare('SELECT mediapath FROM user_answer JOIN user_info ON user_info.UserID=user_answer.UserID WHERE user_answer.QuestionID=? ORDER BY RAND() LIMIT 3');
+                        $stm->execute([$question[0]]);
+                        $res = $stm->get_result();
+                        $stm->free_result();
+                        while ($row = $res->fetch_assoc()) :
+                            array_push($answers, $row['mediapath']);
+                        endwhile;
+                        $total_count_answers = 1;
+                        break;
+                    default:
+                        //general count of answers on survey
+                        $stm = $connection->prepare('SELECT COUNT(*) as count FROM user_answer JOIN user_info ON user_info.UserID=user_answer.UserID WHERE user_answer.QuestionID=?');
+                        $stm->execute([$question[0]]);
+                        $res = $stm->get_result();
+                        $stm->free_result();
+                        $row = $res->fetch_assoc();
+                        $total_count_answers = $row['count'];
+
+                        $stm = $connection->prepare('SELECT answerid FROM answer WHERE QuestionID=?');
+                        $stm->execute([$question[0]]);
+                        $res = $stm->get_result();
+                        $stm->free_result();
+
+                        while ($row = $res->fetch_assoc()) :
+                            $stm = $connection->prepare('SELECT COUNT(*) as count FROM user_answer JOIN user_info ON user_info.userid=user_answer.userid WHERE answerid=?');
+                            $stm->execute([$row['answerid']]);
+                            $res_ans_count = $stm->get_result();
+                            $stm->free_result();
+                            $row_ans_users = $res_ans_count->fetch_assoc();
+                            array_push($answers, $row_ans_users['count']);
+                        endwhile;
+                        break;
+                endswitch;
+                break;
+        endswitch;
+    endif;
+    generate_question($question[1], $question[2], $question[3], $question[4], $question[5], $question[6], $answers, $total_count_answers);
 endforeach;
+
+if (!isset($_POST[RESULTS_MODE])) : ?>
+    <div class="buttons-card">
+        <input type="submit" name="cancel" value="Отмена">
+        <input type="submit" name="confirm" value="Завершить">
+    </div>
+<?php
+endif;

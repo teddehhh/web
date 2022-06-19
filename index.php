@@ -1,4 +1,5 @@
 <?php include 'modules/index/index-start.php'; ?>
+<?php include 'modules/index/survey-processing.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +15,7 @@
     <?php include 'modules/general/header.php' ?>
     <main>
         <?php include 'modules/index/welcome-generate.php'; ?>
+        <?php include 'modules/index/add-survey-section.php'; ?>
         <div class="surveys-section">
             <?php include 'modules/index/surveys-generate.php'; ?>
         </div>
