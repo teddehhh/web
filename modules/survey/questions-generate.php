@@ -50,7 +50,7 @@ function generate_answer_content($infotypeid, $text, $mediapath, $answers_count,
     return;
 };
 
-function generate_question_content($answertypeid, $res_answers, $count, $answers, $total_count_answers)
+function generate_question_content($answertypeid, $res_answers, $count, $answers, $total_count_answers, $isEdit)
 {
     switch ($answertypeid):
         case ANSWER_TEXT:
@@ -131,6 +131,11 @@ function generate_question_content($answertypeid, $res_answers, $count, $answers
                         $disabled = 'disabled';
                     endif; ?>
                     <li>
+                        <?php
+                        if ($isEdit) :
+                            $disabled = 'disabled';
+                        endif;
+                        ?>
                         <input <?php echo $checked; ?> <?php echo $disabled; ?> type="<?php echo $type; ?>" value="<?php echo $answer['answerid']; ?>" name="<?php echo $count . $name_post; ?>" id="<?php echo $count; ?>">
                         <?php
                         generate_answer_content($answer['infotypeid'], $answer['text'], $answer['mediapath'], 0, 0);
@@ -146,7 +151,7 @@ function generate_question_content($answertypeid, $res_answers, $count, $answers
     return;
 };
 
-function generate_question($typequestionid, $answertypeid, $qtext, $qmedia, $res_answers, $count, $answers, $total_count_answers)
+function generate_question($questionid, $typequestionid, $answertypeid, $qtext, $qmedia, $res_answers, $count, $answers, $total_count_answers, $isEdit)
 { ?>
     <div class="question-card">
         <span class="question-card-num"><?php echo $count; ?></span>
@@ -157,10 +162,17 @@ function generate_question($typequestionid, $answertypeid, $qtext, $qmedia, $res
             </div>
             <div class="question-answers">
                 <?php
-                generate_question_content($answertypeid, $res_answers, $count, $answers, $total_count_answers);
+                generate_question_content($answertypeid, $res_answers, $count, $answers, $total_count_answers, $isEdit);
                 ?>
             </div>
         </div>
+        <?php
+        if ($isEdit) : ?>
+            <button type="submit" name="delete" value="<?php echo $questionid; ?>">
+                <img class="survey-cmd" src="images/delete.png">
+            </button>
+        <?php
+        endif; ?>
     </div>
 <?php
     return;
@@ -311,10 +323,60 @@ foreach ($questions_data as $question) :
                 break;
         endswitch;
     endif;
-    generate_question($question[1], $question[2], $question[3], $question[4], $question[5], $question[6], $answers, $total_count_answers);
+    generate_question($question[0], $question[1], $question[2], $question[3], $question[4], $question[5], $question[6], $answers, $total_count_answers, $EDIT);
 endforeach;
 
-if (!isset($_POST[RESULTS_MODE])) : ?>
+if ($EDIT) :
+    $res_answers = $connection->query('SELECT answertypeid, name FROM answer_type');
+    $res_question_types = $connection->query('SELECT infotypeid, name FROM info_type');
+?>
+    <div class="question-card">
+        <span class="question-card-num">+</span>
+        <div class="question-container">
+            <div class="question-header">
+                <input type="text" placeholder="Введите текст вопроса" name="add-question-title">
+            </div>
+            <div class="question-answers">
+                <ul>
+                    <li>
+                        <span>Дополнение к вопросу:</span>
+                        <select name="" id="">
+                            <?php
+                            while ($row = $res_question_types->fetch_assoc()) :
+                                $type_name = $row['infotypeid'] == 1 ? $row['name'] . ' (Без дополнения)' : $row['name']; ?>
+                                <option value="<?php echo $row['infotypeid']; ?>">
+                                    <?php echo $type_name; ?>
+                                </option>
+                            <?php
+                            endwhile; ?>
+                        </select>
+                    </li>
+                    <li>
+                        <span>Тип ответа:</span>
+                        <select name="answertype" id="answertype">
+                            <?php
+                            while ($row = $res_answers->fetch_assoc()) : ?>
+                                <option value="<?php echo $row['answertypeid']; ?>">
+                                    <?php echo $row['name']; ?>
+                                </option>
+                            <?php
+                            endwhile;
+                            ?>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <button class="question-add-btn" type="submit" name="add-question">
+            <img class="survey-cmd" src="images/add-plus.png">
+        </button>
+    </div>
+    <div class="buttons-card">
+        <input type="submit" name="cancel" value="Отмена">
+        <input type="submit" name="save" value="Сохранить">
+    </div>
+<?php
+elseif (!isset($_POST[RESULTS_MODE])) : ?>
     <div class="buttons-card">
         <input type="submit" name="cancel" value="Отмена">
         <input type="submit" name="confirm" value="Завершить">

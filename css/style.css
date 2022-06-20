@@ -86,7 +86,8 @@ button.navlink:hover,
 .container-header button:hover,
 .survey-control button:hover,
 .add-survey-btn:hover,
-.buttons-card input:hover {
+.buttons-card input:hover,
+.question-card button {
   cursor: pointer;
 }
 
@@ -227,7 +228,8 @@ button.navlink:hover,
   box-sizing: content-box;
 }
 
-.survey-control button {
+.survey-control button,
+.question-card button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -543,6 +545,12 @@ button.navlink:hover,
   color: black;
 }
 
+.question-card form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
 .question-container {
   display: flex;
   flex-direction: column;
@@ -629,6 +637,34 @@ button.navlink:hover,
   padding: 5px;
   background-color: #ff4346;
   border-radius: 10px;
+}
+
+.question-header input {
+  color: white;
+  border: 0px;
+  font-size: 16px;
+  padding: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 2px white solid;
+  background-color: transparent;
+}
+
+.question-header input:focus {
+  outline: none;
+}
+
+.question-answers select {
+  margin: 0 10px;
+  text-align: center;
+  padding: 2px 5px;
+}
+
+.question-container button {
+  width: 40%;
+  background-color: #e9ecee;
+  font-weight: bold;
+  margin: auto;
 }
 
 /* results.php */

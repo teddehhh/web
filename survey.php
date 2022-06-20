@@ -15,10 +15,10 @@
 <body>
     <?php include "modules/general/header.php"; ?>
     <main>
-        <div class="survey-info">
-            <?php include 'modules/survey/survey-header.php'; ?>
-        </div>
         <form action="" method="POST" enctype="multipart/form-data">
+            <div class="survey-info">
+                <?php include 'modules/survey/survey-header.php'; ?>
+            </div>
             <input type="hidden" name="datetimestart" value="<?php echo $datetimestart; ?>" />
             <?php include 'modules/survey/questions-generate.php'; ?>
         </form>

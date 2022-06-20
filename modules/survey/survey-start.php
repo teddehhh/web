@@ -26,6 +26,7 @@ endif;
 if (isset($_GET['edit'])) :
     $EDIT = TRUE;
 else :
+    $EDIT = FALSE;
     // check if user already passed the survey
     $stm = $connection->prepare('SELECT COUNT(*) AS COUNT FROM user_survey WHERE UserID=? AND SurveyID=?');
     $stm->bind_param("ii", $_SESSION[SESSION_USERID], $_GET['surveyid']);

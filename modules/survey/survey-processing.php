@@ -36,6 +36,23 @@ if (isset($_POST['confirm'])) :
         $stm->free_result();
         header('Location: survey-complete.php');
     endif;
+elseif (isset($_POST['save'])) :
+    $stm = $connection->prepare('UPDATE survey SET title=?, description=?, timeend=? WHERE surveyid=?');
+    $stm->bind_param("sssi", $_POST['title'], $_POST['desc'], $_POST['date'], $_GET['surveyid']);
+    $stm->execute();
+    $stm->free_result(); ?>
+    <meta http-equiv="refresh" content="1">
+<?php
+elseif (isset($_POST['delete'])) :
+    $stm = $connection->prepare('DELETE FROM question WHERE questionid=?');
+    $stm->execute([$_POST['delete']]);
+    $stm->free_result(); ?>
+    <meta http-equiv="refresh" content="1">
+<?php
+elseif (isset($_POST['add-question'])) :
+    $stm = $connection->prepare('INSERT INTO question(title,infotypeid,answertypeid,mediapath) values(?,?,?,?)');
+    $stm->bind_param("siii", $_POST['add-question-title'],);
+
 elseif (isset($_POST['cancel'])) :
     header('Location: index.php');
 endif;
