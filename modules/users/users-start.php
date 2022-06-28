@@ -12,6 +12,3 @@ if ($_SESSION[SESSION_ROLEID] != RL_HR) :
     header('Location: index.php');
     exit();
 endif;
-
-date_default_timezone_set('Asia/Yekaterinburg');
-$date = new DateTime();

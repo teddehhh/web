@@ -3,7 +3,7 @@ if ($_SESSION[SESSION_ROLEID] == RL_HR) : ?>
     <div class="add-survey-container">
         <a class="add-survey-btn" href="add-survey.php">
             <img src="images/add.png">
-            <p>Добавить опрос</p>
+            <p>Создать опрос</p>
         </a>
     </div>
 <?php

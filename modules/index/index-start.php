@@ -25,9 +25,9 @@ foreach ($times as $time) :
 endforeach;
 
 if ($_SESSION[SESSION_ROLEID] == RL_HR) :
-    $res = $connection->query('SELECT surveyid, title, description, timeend from survey WHERE IsArchived=FALSE');
+    $res = $connection->query('SELECT surveyid, title, description, timeend, isarchived from survey');
 else :
-    $stm = $connection->prepare('SELECT surveyid, title, description, timeend from survey WHERE surveyid NOT IN (SELECT surveyid from user_survey WHERE userid=?) AND isarchived=FALSE');
+    $stm = $connection->prepare('SELECT surveyid, title, description, isarchived, timeend from survey WHERE surveyid NOT IN (SELECT surveyid from user_survey WHERE userid=?) AND isarchived=FALSE');
     $stm->bind_param("i", $_SESSION[SESSION_USERID]);
     $stm->execute();
     $res = $stm->get_result();

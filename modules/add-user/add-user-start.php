@@ -13,5 +13,4 @@ if ($_SESSION[SESSION_ROLEID] != RL_HR) :
     exit();
 endif;
 
-date_default_timezone_set('Asia/Yekaterinburg');
-$date = new DateTime();
+$EDIT  = isset($_POST['userid']);

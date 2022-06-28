@@ -9,10 +9,10 @@ endif;
 
 //USER
 // user info
-$stm = $connection->prepare('SELECT surname, user_info.name, patronymic, birthday, email, subdivision.name AS subdivision, user_info.subdivisionid FROM user_info JOIN subdivision ON subdivision.subdivisionID=user_info.subdivisionid WHERE userid=?');
+$stm = $connection->prepare('SELECT surname, user_info.name, patronymic, birthday, email, subdivision.name AS subdivision, user_info.subdivisionid, imgpath FROM user_info JOIN subdivision ON subdivision.subdivisionID=user_info.subdivisionid WHERE userid=?');
 $stm->bind_param("i", $_SESSION[SESSION_USERID]);
 $stm->execute();
-$stm->bind_result($surname, $name, $patronymic, $birthday, $email, $subdivision, $subdivisionid);
+$stm->bind_result($surname, $name, $patronymic, $birthday, $email, $subdivision, $subdivisionid, $imgpath);
 $stm->fetch();
 $stm->free_result();
 
@@ -40,14 +40,14 @@ $stm->free_result();
 array_push($statts, ['пройденных опросов', $count_surveys]);
 
 // favorite emoji
-$stm = $connection->prepare('SELECT answer.MediaPath, COUNT(answer.MediaPath) as count FROM answer JOIN user_answer ON user_answer.AnswerID=answer.AnswerID WHERE answer.InfoTypeID=? AND user_answer.UserID=? GROUP BY answer.MediaPath ORDER BY count DESC LIMIT 1');
+$stm = $connection->prepare('SELECT emoji.code as count FROM answer JOIN user_answer ON user_answer.AnswerID=answer.AnswerID JOIN emoji ON emoji.emojiid=answer.emojiid WHERE answer.InfoTypeID=? AND user_answer.UserID=? GROUP BY answer.emojiid ORDER BY count DESC LIMIT 1');
 $typeid = INFO_EMOJI;
 $stm->bind_param("ii", $typeid, $_SESSION[SESSION_USERID]);
 $stm->execute();
-$stm->bind_result($emoji_code, $emoji_count);
+$stm->bind_result($emoji_code);
 $stm->fetch();
 $stm->free_result();
-$emoji_code = $emoji_code == null ? '-' : $emoji_code;
+$emoji_code = $emoji_code == null ? '-' : '&#' . $emoji_code . ';';
 array_push($statts, ['часто используемый смайлик', $emoji_code]);
 
 // avg time

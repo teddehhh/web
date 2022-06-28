@@ -3,7 +3,7 @@
         <th>Название</th>
         <th>Статус подразделения</th>
         <th>Результаты</th>
-        <th>Дата закрытия</th>
+        <th>Доступен до</th>
     </tr>
     <?php
     $stm_emp_count = $connection->prepare('SELECT COUNT(*) as count FROM user_info WHERE subdivisionid=?');
@@ -12,6 +12,7 @@
     $stm_emp_count->fetch();
     $stm_emp_count->free_result();
 
+    $count = 0;
     while ($row = $res->fetch_assoc()) :
         $stm_emp_count = $connection->prepare('SELECT COUNT(*) as count FROM user_survey JOIN user_info ON user_info.userid=user_survey.userid WHERE user_info.subdivisionid=? AND user_survey.surveyid=?');
         $stm_emp_count->execute([$_SESSION[SESSION_SUBDIVID], $row['surveyid']]);
@@ -61,8 +62,13 @@
                 endif; ?>
                 </form>
             </td>
-            <td class="tb-timeend"><?php echo $row['timeend']; ?></td>
+            <td class="tb-timeend"><?php echo date('d-m Y г H:i', strtotime($row['timeend'])); ?></td>
         </tr>
     <?php
-    endwhile; ?>
+        $count++;
+    endwhile;
+    if ($count == 0) : ?>
+        <td colspan="4" style="text-align: center;">Никто не хочет проходить опросы :(</td>
+    <?php
+    endif; ?>
 </table>

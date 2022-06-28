@@ -15,7 +15,8 @@
 <body>
     <?php include "modules/general/header.php"; ?>
     <main>
-        <form action="" method="POST" enctype="multipart/form-data">
+        <?php include 'modules/survey/survey-page-title.php'; ?>
+        <form method="POST" enctype="multipart/form-data" onsubmit="return validateForm(<?php echo $EDIT; ?>, <?php echo $questions_count; ?>, this.submitted);">
             <div class="survey-info">
                 <?php include 'modules/survey/survey-header.php'; ?>
             </div>
@@ -24,6 +25,7 @@
         </form>
     </main>
     <?php include "modules/general/footer.php" ?>
+    <script src="js/survey.js"></script>
 </body>
 
 </html>

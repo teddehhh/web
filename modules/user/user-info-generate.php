@@ -1,5 +1,5 @@
 <div class="info-card">
-    <img src="../../images/push.jpg" alt="">
+    <img src="images/users/<?php echo $imgpath; ?>" alt="">
     <ul>
         <li>
             <p class="info-header">ФИО</p>

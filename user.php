@@ -14,6 +14,7 @@
 <body>
     <?php include 'modules/general/header.php' ?>
     <main>
+        <h1>Личный кабинет</h1>
         <div class="user-container">
             <div class="container-header">
                 <span class="container-title">Персональная информация</span>

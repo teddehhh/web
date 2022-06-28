@@ -46,6 +46,18 @@ main {
   margin: 0 10%;
 }
 
+h1 {
+  margin-bottom: 20px;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+input[type="radio"][disabled][checked] {
+  filter: grayscale(0);
+}
+
 /* index.php */
 
 /* header */
@@ -79,7 +91,7 @@ button.navlink {
   height: 30px;
   border: 0px;
   border-radius: 5px;
-  background-color: #929292;
+  background-color: transparent;
 }
 
 button.navlink:hover,
@@ -87,7 +99,8 @@ button.navlink:hover,
 .survey-control button:hover,
 .add-survey-btn:hover,
 .buttons-card input:hover,
-.question-card button {
+.question-card button,
+.user-cmd {
   cursor: pointer;
 }
 
@@ -97,7 +110,7 @@ button.navlink:hover,
 }
 
 .welcome-message {
-  padding-bottom: 20px;
+  margin: 20px 0;
   font-size: 26px;
   font-weight: 500;
 }
@@ -113,6 +126,7 @@ button.navlink:hover,
   color: white;
   border-radius: 5px;
   border: 0px;
+  box-shadow: 3px 3px 5px black;
 }
 
 .add-survey-btn img {
@@ -125,7 +139,7 @@ button.navlink:hover,
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
-  padding-bottom: 50px;
+  padding: 20px 0;
 }
 
 .survey-card-control {
@@ -137,7 +151,8 @@ button.navlink:hover,
   margin: 1%;
   height: 170px;
   border-radius: 13px;
-  border: 3px #293240 solid;
+  background-color: white;
+  box-shadow: 0px 2px 5px grey;
 }
 
 .survey-control {
@@ -213,7 +228,7 @@ button.navlink:hover,
   text-align: center;
   padding: 4px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: bold;
 }
 
 .survey-timeend {
@@ -229,13 +244,14 @@ button.navlink:hover,
 }
 
 .survey-control button,
-.question-card button {
+.question-card button,
+.user-cmd {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 4px;
   margin: 5px;
-  background-color: #293240;
+  background-color: transparent;
   border: 0px;
   border-radius: 5px;
 }
@@ -266,6 +282,7 @@ button.navlink:hover,
   flex-wrap: wrap;
   padding: 5%;
   color: white;
+  box-shadow: 0px 5px 5px rgb(97, 97, 97);
 }
 
 .info-card img {
@@ -312,7 +329,6 @@ button.navlink:hover,
   height: 30px;
   border: 0px;
   border-radius: 5px;
-  background-color: #929292;
 }
 
 .download-stats {
@@ -339,6 +355,7 @@ button.navlink:hover,
   border-radius: 10px;
   background-color: #ff4346;
   color: white;
+  box-shadow: 0px 5px 5px rgb(97, 97, 97);
 }
 
 .stat-card img {
@@ -365,6 +382,7 @@ button.navlink:hover,
   border-radius: 10px;
   background-color: #293240;
   color: white;
+  box-shadow: 0px 5px 5px rgb(97, 97, 97);
 }
 
 .history-container table tr {
@@ -393,6 +411,7 @@ button.navlink:hover,
   color: white;
   border-radius: 10px;
   font-size: 14px;
+  min-width: 100px;
 }
 
 .history-btn-survey:hover {
@@ -509,9 +528,11 @@ button.navlink:hover,
   flex-direction: column;
   min-height: 150px;
   padding: 20px;
+  margin-top: 20px;
   border-radius: 10px;
   background-color: #ff4346;
   color: white;
+  box-shadow: 0px 5px 5px rgb(97, 97, 97);
 }
 
 .survey-about {
@@ -532,6 +553,7 @@ button.navlink:hover,
   border-radius: 10px;
   background-color: #293240;
   color: white;
+  box-shadow: 0px 5px 5px rgb(97, 97, 97);
 }
 
 .question-card-num {
@@ -556,7 +578,7 @@ button.navlink:hover,
   flex-direction: column;
   width: 90%;
   word-wrap: break-word;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 .question-header {
@@ -611,15 +633,21 @@ button.navlink:hover,
   margin-top: 20px;
   border-radius: 10px;
   background-color: #293240;
+  box-shadow: 0px 5px 5px rgb(97, 97, 97);
 }
 
-.buttons-card input {
+.buttons-card input,
+.buttons-card a {
   font-family: "Montserrat", sans-serif;
   border: 0px;
   padding: 5px 10px;
   font-weight: bold;
   border-radius: 5px;
   color: white;
+}
+
+.cancel-link {
+  font-size: 13px;
 }
 
 .buttons-card input:first-child {
@@ -633,6 +661,7 @@ button.navlink:hover,
 
 .percent {
   margin-left: 20px;
+  height: 20px;
   font-weight: bold;
   padding: 5px;
   background-color: #ff4346;
@@ -664,7 +693,67 @@ button.navlink:hover,
   width: 40%;
   background-color: #e9ecee;
   font-weight: bold;
-  margin: auto;
+}
+
+.answer-input {
+  border: 0px;
+  padding: 2px;
+  width: 60%;
+  border-bottom: 2px white solid;
+  color: white;
+  background-color: #293240;
+}
+
+.answer-input:focus {
+  outline: none;
+}
+
+.add-answer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-top: 10px;
+}
+
+.add-answer-container button {
+  width: 25px;
+  background-color: #293240;
+}
+
+.answer-data-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.answer-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+.answer-container button {
+  width: 25px;
+  background-color: #293240;
+}
+
+.question-answer-type {
+  padding: 5px;
+  margin-top: 5px;
+  color: black;
+  text-align: text;
+  border-radius: 5px;
+  font-size: 12px;
+  border: 0px;
+  background-color: #d9d9d9;
+  width: 200px;
+  text-align: center;
 }
 
 /* results.php */
@@ -681,19 +770,18 @@ button.navlink:hover,
 }
 
 .results-container tr {
-  line-height: 35px;
+  line-height: 40px;
   background-color: #293240;
   color: white;
-  padding: 10px;
+}
+
+.tb-status {
+  padding-top: 10px;
 }
 
 .tb-title,
 .tb-timeend {
   padding: 0 10px;
-}
-
-.tb-status {
-  padding: 10px;
 }
 
 .results-container th,
@@ -713,7 +801,17 @@ button.navlink:hover,
 }
 
 .survey-status {
-  width: 30px;
+  width: 25px;
+}
+
+.question-type-file,
+.question-type-emoji {
+  display: none;
+}
+
+.answered-input {
+  width: 14px;
+  margin-right: 15px;
 }
 
 /* add-survey.php */
@@ -735,13 +833,16 @@ button.navlink:hover,
   color: white;
 }
 
-.survey-info input,
-.add-survey-date-container {
+.survey-info input:nth-last-child(1) {
+  margin-bottom: 0;
+}
+
+.survey-info input[type="text"] {
   margin-bottom: 20px;
 }
 
-.survey-info input:nth-last-child(1) {
-  margin-bottom: 0;
+.survey-info input[type="text"]::placeholder {
+  color: white;
 }
 
 .add-survey-date-container {
@@ -749,7 +850,12 @@ button.navlink:hover,
   align-items: center;
   background-color: #293240;
   border-radius: 10px;
+  margin-top: 20px;
   padding: 5px;
+}
+
+.add-survey-date-container .add-survey-datetime:nth-last-child(1) {
+  margin-left: 10px;
 }
 
 .add-survey-datetime {
@@ -762,6 +868,71 @@ button.navlink:hover,
 .add-survey-title:focus,
 .add-survey-desc:focus {
   outline: none;
+}
+
+/* users.php */
+.control-column {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.users-table td {
+  padding: 0 10px;
+}
+
+/* add-user.php */
+.reg-form {
+  width: 100%;
+}
+
+.user-img {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-info-input {
+  background-color: #181e29;
+  border: 0px;
+  height: 30px;
+  border-radius: 5px;
+  border-bottom: 2px white solid;
+  padding: 4px;
+  color: white;
+}
+.user-info-input:focus {
+  outline: none;
+}
+
+.sublist {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+
+.sublist li {
+  margin-right: 10px;
+}
+
+.reg-form hr {
+  height: 2px;
+  background-color: white;
+}
+
+#role,
+#subdiv,
+#birthday {
+  border-radius: 5px;
+  height: 25px;
+  text-align: center;
+  border: 2px #181e29 solid;
+}
+
+#imgbtn {
+  border: 0px;
 }
 
 /* media-queries */

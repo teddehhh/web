@@ -23,10 +23,28 @@ else :
     header('Location: index.php');
 endif;
 
+$EDIT = 0;
 if (isset($_GET['edit'])) :
+    $stm = $connection->prepare('SELECT isarchived FROM survey WHERE surveyid=?');
+    $stm->bind_param("i", $_GET['surveyid']);
+    $stm->execute();
+    $res = $stm->get_result();
+    $row = $res->fetch_assoc();
+    if (!$row['isarchived']) :
+        header('Location: index.php');
+        exit();
+    endif;
     $EDIT = TRUE;
-else :
-    $EDIT = FALSE;
+elseif (!isset($_POST[RESULTS_MODE]) && !isset($_POST['logout'])) :
+    $stm = $connection->prepare('SELECT isarchived FROM survey WHERE surveyid=?');
+    $stm->bind_param("i", $_GET['surveyid']);
+    $stm->execute();
+    $res = $stm->get_result();
+    $row = $res->fetch_assoc();
+    if ($row['isarchived']) :
+        header('Location: index.php');
+        exit();
+    endif;
     // check if user already passed the survey
     $stm = $connection->prepare('SELECT COUNT(*) AS COUNT FROM user_survey WHERE UserID=? AND SurveyID=?');
     $stm->bind_param("ii", $_SESSION[SESSION_USERID], $_GET['surveyid']);
@@ -36,9 +54,7 @@ else :
     $stm->free_result();
 
     if ($ispassed == TRUE) :
-        if (!isset($_POST[RESULTS_MODE])) :
-            header('Location: survey-complete.php');
-            exit();
-        endif;
+        header('Location: survey-complete.php');
+        exit();
     endif;
 endif;

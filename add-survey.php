@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Добавление опроса</title>
+    <title>Создание опроса</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -14,15 +14,17 @@
 <body>
     <?php include 'modules/general/header.php' ?>
     <main>
-        <form method="POST">
+        <h1>Создание опроса</h1>
+        <form method="POST" onsubmit="return validateForm();">
             <?php include 'modules/add-survey/survey-content.php' ?>
             <div class="buttons-card">
-                <input type="submit" name="cancel" value="Отмена">
-                <input type="submit" name="confirm" value="Добавить">
+                <a class="cancel-link" href="index.php">Отмена</a>
+                <input type="submit" name="confirm" value="Создать">
             </div>
         </form>
     </main>
     <?php include 'modules/general/footer.php' ?>
+    <script src="js/add-survey.js"></script>
 </body>
 
 </html>

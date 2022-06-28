@@ -17,12 +17,14 @@ window.onload = () => {
 
 exportToExcel = function () {
   var csvString = "";
+    csvString+="Параметр, значение\n";
   data.forEach(function (rowItem, rowIndex) {
     rowItem.forEach(function (colItem, colIndex) {
       csvString += colItem + ",";
     });
-    csvString += "\r\n";
+      csvString+="\n";
   });
+
   console.log(decodeURIComponent(csvString));
   var x = document.createElement("a");
   x.setAttribute("href", "data:text/csv; charset=utf-8, " + csvString);

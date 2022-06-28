@@ -1,7 +1,10 @@
 <?php
 if (isset($_POST['confirm'])) :
-    $stm = $connection->prepare('INSERT INTO survey(title, description, timeend) values(?,?,?)');
-    $stm->bind_param("sss", $_POST['title'], $_POST['desc'], $_POST['date']);
+    $stm = $connection->prepare('INSERT INTO survey(title, description, timeend, isarchived) values(?,?,?,?)');
+    $desc = $_POST['desc'];
+    $isarchived = 1;
+    $datetime = $_POST['date'] . ' ' . $_POST['time'];
+    $stm->bind_param("sssi", $_POST['title'], $desc, $datetime, $isarchived);
     $stm->execute();
     $stm->free_result();
     $res = $connection->query('SELECT LAST_INSERT_ID() as id');

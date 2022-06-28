@@ -10,24 +10,36 @@ while ($row = $res->fetch_assoc()) : ?>
             <p class="survey-card-info"><?php echo $row['description'] ?></p>
         </a>
         <div class="survey-control">
-            <span class="survey-date">До <?php echo $row['timeend']; ?></span>
-            <?php
-            if ($_SESSION[SESSION_ROLEID] == RL_HR) : ?>
-                <form method="POST">
+            <span class="survey-date">До <?php echo date('d-m Y г H:i', strtotime($row['timeend'])); ?></span>
+            <form method="POST" onsubmit="return surveyControl(this.submitted, '<?php echo $row['timeend']; ?>');">
+                <?php
+                if ($_SESSION[SESSION_ROLEID] == RL_HR) : ?>
+                    <input type="hidden" value="<?php echo $row['timeend']; ?>" name="timeend" id="timeend">
                     <input type="hidden" value="<?php echo $row['surveyid']; ?>" name="surveyid">
-                    <button type="submit" name="edit">
-                        <img class="survey-cmd" src="images/edit.png">
-                    </button>
-                </form>
-                <form method="POST">
-                    <input type="hidden" value="<?php echo $row['surveyid']; ?>" name="surveyid">
-                    <button type="submit" name="delete">
+                    <?php
+                    if ($row['isarchived']) : ?>
+                        <button type="submit" name="edit" onclick="this.form.submitted=this.value;">
+                            <img class="survey-cmd" src="images/edit.png">
+                        </button>
+                    <?php else : ?>
+                        <button type="submit" name="unload" onclick="this.form.submitted=this.value;" value="unload">
+                            <img class="survey-cmd" src="images/unload.png">
+                        </button>
+                    <?php
+                    endif; ?>
+                    <button type="submit" name="delete" onclick="this.form.submitted=this.value;" value="delete">
                         <img class="survey-cmd" src="images/delete.png" alt="">
                     </button>
-                </form>
-            <?php
-            endif;
-            ?>
+                    <?php
+                    if ($row['isarchived']) : ?>
+                        <button type="submit" name="upload" onclick="this.form.submitted=this.value;" value="upload">
+                            <img class="survey-cmd" src="images/upload.png" alt="">
+                        </button>
+                <?php
+                    endif;
+                endif;
+                ?>
+            </form>
         </div>
     </div>
 <?php

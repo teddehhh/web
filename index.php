@@ -14,6 +14,7 @@
 <body>
     <?php include 'modules/general/header.php' ?>
     <main>
+        <h1>Главная</h1>
         <?php include 'modules/index/welcome-generate.php'; ?>
         <?php include 'modules/index/add-survey-section.php'; ?>
         <div class="surveys-section">
@@ -21,6 +22,7 @@
         </div>
     </main>
     <?php include 'modules/general/footer.php' ?>
+    <script src="js/index.js"></script>
 </body>
 
 </html>

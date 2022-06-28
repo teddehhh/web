@@ -9,7 +9,7 @@
         $min = intdiv($time, 60);
         $sec = $time % 60; ?>
         <tr class="row">
-            <td class="date-col"><?php echo $date; ?></td>
+            <td class="date-col"><?php echo date('d-m Y г', strtotime($date)); ?></td>
             <td>
                 <form method="POST" action="survey.php?surveyid=<?php echo $surveyid; ?>">
                     <input type="hidden" name="<?php echo RESULTS_MODE; ?>" value="<?php echo MY_RES; ?>">
